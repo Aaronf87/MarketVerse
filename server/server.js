@@ -30,8 +30,6 @@ const startApolloServer = async () => {
 
   server.applyMiddleware({ app });
 
-  // !Revisit  app.use('/images', express.static(path.join(__dirname, '../client/public/images')));
-
   if (process.env.NODE_ENV === "production") {
     app.use(express.static(path.join(__dirname, "../client/dist")));
 
