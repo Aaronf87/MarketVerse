@@ -6,7 +6,7 @@ type User {
     username: String!
     email: String!
     password: String!
-    orders: [Cart]
+    orders: [Order]
 }
 
 type Book {
@@ -22,7 +22,7 @@ type Book {
     price: Float
 }
 
-type Cart {
+type Order {
 #! Revisit
     _id: ID
 
@@ -35,7 +35,7 @@ type Cart {
 type Checkout {
     session: ID
   }
-  
+
 type Auth {
     token: ID!
     user: User
@@ -47,7 +47,8 @@ type Query {
     user(userId: ID!): User
     books: [Book]
     book(bookId: ID!): Book
-    cart(userId: ID!): Cart
+    order(_id: ID!): Order
+    #checkout(itmes: [BookInput]): Checkout
 }
 
 
