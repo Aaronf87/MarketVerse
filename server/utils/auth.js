@@ -1,5 +1,6 @@
-const { GraphQLError } = require('graphql');
 const jwt = require('jsonwebtoken');
+const { GraphQLError } = require('graphql');
+require("dotenv").config();
 
 // !Revisit = Change to Environment Variable
 const secret = 'mysecretsshhhhh';

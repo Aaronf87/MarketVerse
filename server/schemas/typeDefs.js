@@ -50,13 +50,13 @@ type Query {
     order(_id: ID!): Order
 
     #! Revisit
-    checkout(items: [BookInput]): Checkout
+    #checkout(items: [BookInput]): Checkout
 }
 
 type Mutation {
-login (email: String!, password: String!): Auth
-addUser (firstName: String!, lastName: String!, username: String!, email: String!, password: String!): Auth
-addOrder (books: [ID]!): Order
+    login (email: String!, password: String!): Auth
+    addUser (firstName: String!, lastName: String!, username: String!, email: String!, password: String!): Auth
+    addOrder (books: [ID]!): Order
 }
 
 `;

@@ -1,6 +1,6 @@
 // Import Express.js and Apollo Server
 const express = require("express");
-const { ApolloServer } = require("@apollo/server");
+const { ApolloServer } = require("apollo-server-express");
 
 // Import Schema and Resolvers from the schema folder
 const { typeDefs, resolvers } = require("./schemas");
