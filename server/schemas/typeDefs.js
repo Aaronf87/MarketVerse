@@ -10,7 +10,7 @@ type User {
 }
 
 type Book {
-#! Revisit
+    #! Revisit
     _id: ID
 
     bookId: ID!
@@ -23,7 +23,7 @@ type Book {
 }
 
 type Order {
-#! Revisit
+    #! Revisit
     _id: ID
 
     #userId: ID!
@@ -48,10 +48,16 @@ type Query {
     books: [Book]
     book(bookId: ID!): Book
     order(_id: ID!): Order
-    #checkout(itmes: [BookInput]): Checkout
+
+    #! Revisit
+    checkout(items: [BookInput]): Checkout
 }
 
-
+type Mutation {
+login (email: String!, password: String!): Auth
+addUser (firstName: String!, lastName: String!, username: String!, email: String!, password: String!): Auth
+addOrder (books: [ID]!): Order
+}
 
 `;
 
