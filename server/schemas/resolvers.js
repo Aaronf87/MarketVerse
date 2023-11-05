@@ -10,7 +10,7 @@ const resolvers = {
       if (context.user) {
         const userData = await User.findOne({ _id: context.user._id })
           .select("-__v -password")
-          .populate("order");
+        //   .populate("order");
 
         return userData;
       }
@@ -21,6 +21,7 @@ const resolvers = {
 
   Mutation: {
     addUser: async (parent, args) => {
+        console.log(args)
       try {
         const user = await User.create(args);
         const token = signToken(user);
