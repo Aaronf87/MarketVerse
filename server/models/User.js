@@ -1,5 +1,5 @@
 const { Schema, model } = require("mongoose");
-const Order = require("./Cart");
+const Order = require("./Order");
 
 const bcrypt = require("bcrypt");
 
@@ -34,7 +34,7 @@ const userSchema = new Schema({
     minlength: 8,
   },
   // This is where we establish the relationship between the User and the Cart data models
-  orders: [Cart.schema],
+  orders: [Order.schema],
 });
 
 // Encrypts user's password setting up middleware
