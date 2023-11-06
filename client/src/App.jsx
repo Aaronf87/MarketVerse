@@ -1,16 +1,19 @@
+import { Routes, Route } from "react-router-dom"
+import Home from "./pages/Home"
+import NotFound from "./pages/notfound"
+
 function App() {
 
   return (
     <>
        <>
-    <Header/>
+  
+    {/* <Header/> */}
     <Routes>
       <Route path="/" element={<Home/>}/>
-      <Route path="/about" element={<Login/>}/>
-      <Route path="/contact" element={<Register/>}/>
       <Route path="*" element={<NotFound/>}/>
     </Routes>
-    <Footer/>
+    {/* <Footer/> */}
     </>
 
 
