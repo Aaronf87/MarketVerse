@@ -42,7 +42,7 @@ const resolvers = {
         .select("-__v -password");
     },
 
-    categories: async () => {
+    getCategories: async () => {
       return await Category.find();
     },
 

@@ -57,10 +57,10 @@ type Query {
     me: User
     getProducts(category: ID): [Product]
     getProduct(_id: ID!): Product
+    getCategories: [Category]
 
     user: User
     order(_id: ID!): Order
-    categories: [Category]
 
     #checkout(products: [ProductInput]): Checkout
 }
