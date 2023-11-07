@@ -31,12 +31,20 @@ const userSchema = new Schema({
     required: true,
     minlength: 8,
   },
-
   // Relationship between the User and the Product data models
-  products: [Product.schema],
-
-  // Relationship between the User and the Cart data models
-  orders: [Order.schema],
+  products: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Product",
+    },
+  ],
+  // Relationship between the User and the Order data models
+  orders: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Order",
+    },
+  ],
 });
 
 // Encrypts user's password setting up middleware

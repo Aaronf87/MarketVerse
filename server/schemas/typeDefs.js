@@ -33,6 +33,11 @@ type Order {
     quantity: Int
 }
 
+type Category {
+    _id: ID
+    name: String
+}
+
 type Checkout {
     session: ID
   }
@@ -50,7 +55,7 @@ type Query {
     product(_id: ID!): Product
     user: User
     order(_id: ID!): Order
-    checkout(products: [ProductInput]): Checkout
+    #checkout(products: [ProductInput]): Checkout
 }
 
 type Mutation {
