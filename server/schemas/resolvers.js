@@ -46,17 +46,30 @@ const resolvers = {
       return await Category.find();
     },
 
-    order: async (parent, { _id }, context) => {
+    getOrder: async (parent, { _id }, context) => {
       if (context.user) {
-        const user = await User.findById(context.user._id).populate({
-          path: "order.products",
-          populate: "category",
-        });
-        return user.order.id(_id);
+        const order = await Order.findOne({ _id: _id })
+          .populate("userId")
+          .select("-__v -password")
+          .populate("products")
+          .populate({ path: "products", populate: "category" });
+
+        // Check if the order exists and if it belongs to the logged-in user
+        if (!order) {
+          throw new Error("Order not found");
+        }
+
+        if (order.userId._id.toString() !== context.user._id) {
+          throw new AuthenticationError(
+            "You do not have permission to access this order"
+          );
+        }
+
+        return order;
       }
-      throw AuthenticationError;
+
+      throw new AuthenticationError("User not authenticated");
     },
-    // checkout query TODO.
   },
 
   Mutation: {
