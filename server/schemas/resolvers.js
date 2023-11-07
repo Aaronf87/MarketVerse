@@ -1,4 +1,4 @@
-const { User, Book, Order } = require("../models");
+const { User, Product, Order, Category, Product } = require("../models");
 const { signToken, AuthenticationError } = require("../utils/auth");
 require("dotenv").config();
 
@@ -6,17 +6,37 @@ require("dotenv").config();
 
 const resolvers = {
   Query: {
-    me: async (parent, args, context) => {
-      if (context.user) {
-        const userData = await User.findOne({ _id: context.user._id })
-          .select("-__v -password")
-        //   .populate("order");
-
-        return userData;
-      }
-
-      throw new AuthenticationError();
+    categories: async() => {
+      return await Category.find();
     },
+    products: async (parent, { category, name }) => {
+      const params = {};
+
+      if (category) {
+        params.category = category;
+      }
+      if (name) {
+        params.name = {
+          $regex: name
+        };
+      }
+      return await Product.find(params).populate('category');
+    },
+    product: async (parent,{_id}) => {
+      return await Product.findById(_id).populate('category');
+    },
+
+    // me: async (parent, args, context) => {
+    //   if (context.user) {
+    //     const userData = await User.findOne({ _id: context.user._id })
+    //       .select("-__v -password")
+    //     //   .populate("order");
+
+    //     return userData;
+    //   }
+
+    //   throw new AuthenticationError();
+    // },
   },
 
   Mutation: {
