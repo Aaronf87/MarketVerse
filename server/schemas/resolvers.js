@@ -7,7 +7,7 @@ require("dotenv").config();
 
 const resolvers = {
   Query: {
-    categories: async() => {
+    categories: async () => {
       return await Category.find();
     },
     products: async (parent, { category, name }) => {
@@ -18,18 +18,19 @@ const resolvers = {
       }
       if (name) {
         params.name = {
-          $regex: name
+          $regex: name,
         };
       }
-      return await Product.find(params).populate('category');
+      return await Product.find(params).populate("category");
     },
-    product: async (parent,{_id}) => {
-      return await Product.findById(_id).populate('category');
+    product: async (parent, { _id }) => {
+      return await Product.findById(_id).populate("category");
     },
     me: async (parent, args, context) => {
       if (context.user) {
-        const userData = await User.findOne({ _id: context.user._id })
-          .select("-__v -password")
+        const userData = await User.findOne({ _id: context.user._id }).select(
+          "-__v -password"
+        );
         //   .populate("order");
 
         return userData;
@@ -37,11 +38,11 @@ const resolvers = {
 
       throw new AuthenticationError();
     },
-    user: async (parent, args, context) => { 
-      if (context.user) { 
+    user: async (parent, args, context) => {
+      if (context.user) {
         const user = await User.findById(context.user._id).populate({
-          path: 'orders.products',
-          populate: 'category'
+          path: "orders.products",
+          populate: "category",
         });
         return user;
       }
@@ -50,8 +51,8 @@ const resolvers = {
     order: async (parent, { _id }, context) => {
       if (context.user) {
         const user = await User.findById(context.user._id).populate({
-          path: 'order.products',
-          populate: 'category'
+          path: "order.products",
+          populate: "category",
         });
         return user.order.id(_id);
       }
@@ -61,17 +62,6 @@ const resolvers = {
   },
 
   Mutation: {
-    addUser: async (parent, args) => {
-
-      try {
-        const user = await User.create(args);
-        const token = signToken(user);
-        return { token, user };
-      } catch (error) {
-        throw new Error("Failed to create user!");
-      }
-    },
-
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
 
@@ -90,10 +80,61 @@ const resolvers = {
       return { token, user };
     },
 
+    addUser: async (parent, args) => {
+      try {
+        const user = await User.create(args);
+        const token = signToken(user);
+        return { token, user };
+      } catch (error) {
+        throw new Error("Failed to create User!");
+      }
+    },
+
+    updateUser: async (parent, args, context) => {
+      if (context.user) {
+        return await User.findByIdAndUpdate(context.user._id, args, {
+          new: true,
+        });
+      }
+      throw AuthenticationError;
+    },
+
+    deleteUser: async (parent, { confirm }, context) => {
+      if (context.user) {
+        if (confirm) {
+          try {
+            // Delete the user by their ID
+            const deletedUser = await User.findByIdAndDelete(context.user._id);
+
+            if (!deletedUser) {
+              throw new Error("User not found.");
+            }
+
+            // Clean up associated user data (products and orders)
+            await Product.deleteMany({ userId: context.user._id });
+            await Order.deleteMany({ userId: context.user._id });
+
+            // Return a message indicating successful deletion
+            return {
+              data: `User ${context.user.username} deleted successfully`,
+              errors: [],
+            };
+          } catch (error) {
+            throw new Error("Failed to delete user: " + error.message);
+          }
+        } else {
+          throw new Error("You must confirm deletion!");
+        }
+      }
+      throw new AuthenticationError("User not authenticated");
+    },
+
     addOrder: async (parent, { products }, context) => {
-      if (context.user) { 
+      if (context.user) {
         const order = new Order({ products });
-        await User.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
+        await User.findByIdAndUpdate(context.user._id, {
+          $push: { orders: order },
+        });
         return order;
       }
       throw AuthenticationError;

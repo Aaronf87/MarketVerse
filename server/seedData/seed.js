@@ -32,9 +32,9 @@ const seedDatabase = async () => {
 
     // DROP EXISTING COLLECTIONS FROM THE DATABASE (IF ANY EXIST).
     await dropCollectionIfExists("users");
-    await dropCollectionIfExists("orders");
-    await dropCollectionIfExists("products");
     await dropCollectionIfExists("categories");
+    await dropCollectionIfExists("products");
+    await dropCollectionIfExists("orders");
 
     // SEED THE USER COLLECTION WITH RANDOM USERS AND EMAILS.
     const users = [];

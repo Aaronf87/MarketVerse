@@ -7,26 +7,29 @@ type User {
     email: String!
     products: [Product]
     orders: [Order]
-    # Removed password field for security reasons
+    
+    # ! Revisit: Remove password field for security reasons
+    password: String!
 }
 
 type Product {
     _id: ID
-    user: User!
+    userId: User!
     name: String!
     description: String
     price: Float!
     quantity: Int
-    category: Category! # Ensure this type is defined
+    category: Category! 
     image: String
 }
 
 type Order {
     _id: ID
-    user: User! # Assume that we have a reference to the User object, not just the ID
+    userId: User!
     purchaseDate: String
     products: [Product]
     quantity: Int
+
     # Consider adding other relevant fields such as order status
 }
 
@@ -35,13 +38,18 @@ type Category {
     name: String!
 }
 
+type Checkout {
+    session: ID
+}
+
 type Auth {
     token: ID!
     user: User
 }
 
-type Checkout {
-    session: ID
+type Response {
+data: String
+errors: [String]
 }
 
 type Query {
@@ -52,12 +60,16 @@ type Query {
     product(_id: ID!): Product
     user: User
     order(_id: ID!): Order
+
     #checkout(products: [ProductInput]): Checkout
 }
 
 type Mutation {
     login(email: String!, password: String!): Auth
     addUser(firstName: String!, lastName: String!, username: String!, email: String!, password: String!): Auth
+    updateUser(firstName: String, lastName: String, username: String, email: String, password: String): User
+    deleteUser(confirm: Boolean!): Response
+
     addOrder(products: [ID]!): Order
     createCheckoutSession(products: [ProductInput]!): Checkout # This is the new mutation for Stripe
 }
