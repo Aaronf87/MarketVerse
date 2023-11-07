@@ -90,7 +90,16 @@ const resolvers = {
       return { token, user };
     },
 
-    //! checkout: async (parent, args, context) => {        console.log(args)
+    addOrder: async (parent, { products }, context) => {
+      if (context.user) { 
+        const order = new Order({ products });
+        await User.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
+        return order;
+      }
+      throw AuthenticationError;
+    },
+
+    //addProduct
   },
 };
 
