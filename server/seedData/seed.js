@@ -167,7 +167,7 @@ const seedDatabase = async () => {
     }
 
     console.log(chalk.bold.green`\n===========================================================`);
-    console.log(chalk.bold.green`CREATED ${chalk.bold.magenta`ORDER`} COLLECTION: SEEDED "${chalk.bold.magenta(orders.length)}" ORDERS!`);
+    console.log(chalk.bold.green`CREATED ${chalk.bold.magenta`ORDER`} COLLECTION: SEEDED "${chalk.bold.magenta(orders.length)}" ORDERS AND UPDATED USERS!`);
     console.log(chalk.bold.green`===========================================================`);
 
     console.log(chalk.bold.green`\n===========================================================`);

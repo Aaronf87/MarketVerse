@@ -55,13 +55,12 @@ errors: [String]
 
 type Query {
     me: User
-    
-    users: [User]
-    categories: [Category]
-    products(category: ID, name: String): [Product]
+    getProducts(category: ID): [Product]
+
     product(_id: ID!): Product
     user: User
     order(_id: ID!): Order
+    categories: [Category]
 
     #checkout(products: [ProductInput]): Checkout
 }

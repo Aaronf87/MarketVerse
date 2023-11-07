@@ -7,26 +7,6 @@ require("dotenv").config();
 
 const resolvers = {
   Query: {
-    categories: async () => {
-      return await Category.find();
-    },
-    products: async (parent, { category, name }) => {
-      const params = {};
-
-      if (category) {
-        params.category = category;
-      }
-      if (name) {
-        params.name = {
-          $regex: name,
-        };
-      }
-      return await Product.find(params).populate("category");
-    },
-    product: async (parent, { _id }) => {
-      return await Product.findById(_id).populate("category");
-    },
-    
     me: async (parent, args, context) => {
       if (context.user) {
         const userData = await User.findOne({ _id: context.user._id })
@@ -41,16 +21,28 @@ const resolvers = {
 
       throw new AuthenticationError();
     },
-    user: async (parent, args, context) => {
-      if (context.user) {
-        const user = await User.findById(context.user._id).populate({
-          path: "orders.products",
-          populate: "category",
-        });
-        return user;
+
+    getProducts: async (parent, { category }) => {
+      const params = {};
+
+      if (category) {
+        params.category = category;
       }
-      throw AuthenticationError;
+
+      return await Product.find(params)
+        .populate("category")
+        .populate("userId")
+        .select("-__v -password");
     },
+
+    product: async (parent, { _id }) => {
+      return await Product.findById(_id).populate("category");
+    },
+
+    categories: async () => {
+      return await Category.find();
+    },
+
     order: async (parent, { _id }, context) => {
       if (context.user) {
         const user = await User.findById(context.user._id).populate({
