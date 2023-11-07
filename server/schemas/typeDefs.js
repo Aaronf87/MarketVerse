@@ -6,29 +6,30 @@ type User {
     username: String!
     email: String!
     password: String!
+    products: [Product]
     orders: [Order]
 }
 
-type Book {
-    #! Revisit
+type Product {
     _id: ID
 
-    bookId: ID!
-    authors: [String]
+    # ! Revisit
+    user: User!
+    name: String!
     description: String
+    price: Float!
+    quantity: Int
+    category: Category!
     image: String
-    link: String
-    title: String!
-    price: Float
 }
 
 type Order {
     #! Revisit
-    _id: ID
 
-    #userId: ID!
+    _id: ID
+    userId: ID!
     purchaseDate: String
-    books: [Book]
+    products: [Product]
     quantity: Int
 }
 
@@ -44,13 +45,12 @@ type Auth {
 type Query {
     me: User
     users: [User]
-    user(userId: ID!): User
-    books: [Book]
-    book(bookId: ID!): Book
+    categories: [Category]
+    products(category: ID, name: String): [Product]
+    product(_id: ID!): Product
+    user: User
     order(_id: ID!): Order
-
-    #! Revisit
-    #checkout(items: [BookInput]): Checkout
+    checkout(products: [ProductInput]): Checkout
 }
 
 type Mutation {
@@ -62,4 +62,3 @@ type Mutation {
 `;
 
 module.exports = typeDefs;
-

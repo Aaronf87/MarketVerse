@@ -10,7 +10,7 @@ const orderSchema = new Schema({
     type: Date,
     default: Date.now,
   },
-  items: [
+  products: [
     {
       // This is expecting an array of ObjectId's from the Product model
       type: Schema.Types.ObjectId,
