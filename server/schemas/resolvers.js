@@ -1,4 +1,5 @@
-const { User, Book, Order } = require("../models");
+const { async } = require("rxjs");
+const { User, Product, Order, Category, Product } = require("../models");
 const { signToken, AuthenticationError } = require("../utils/auth");
 require("dotenv").config();
 
@@ -6,6 +7,25 @@ require("dotenv").config();
 
 const resolvers = {
   Query: {
+    categories: async() => {
+      return await Category.find();
+    },
+    products: async (parent, { category, name }) => {
+      const params = {};
+
+      if (category) {
+        params.category = category;
+      }
+      if (name) {
+        params.name = {
+          $regex: name
+        };
+      }
+      return await Product.find(params).populate('category');
+    },
+    product: async (parent,{_id}) => {
+      return await Product.findById(_id).populate('category');
+    },
     me: async (parent, args, context) => {
       if (context.user) {
         const userData = await User.findOne({ _id: context.user._id })
@@ -17,6 +37,27 @@ const resolvers = {
 
       throw new AuthenticationError();
     },
+    user: async (parent, args, context) => { 
+      if (context.user) { 
+        const user = await User.findById(context.user._id).populate({
+          path: 'orders.products',
+          populate: 'category'
+        });
+        return user;
+      }
+      throw AuthenticationError;
+    },
+    order: async (parent, { _id }, context) => {
+      if (context.user) {
+        const user = await User.findById(context.user._id).populate({
+          path: 'order.products',
+          populate: 'category'
+        });
+        return user.order.id(_id);
+      }
+      throw AuthenticationError;
+    },
+    // checkout query TODO.
   },
 
   Mutation: {
@@ -49,7 +90,16 @@ const resolvers = {
       return { token, user };
     },
 
-    //! checkout: async (parent, args, context) => {        console.log(args)
+    addOrder: async (parent, { products }, context) => {
+      if (context.user) { 
+        const order = new Order({ products });
+        await User.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
+        return order;
+      }
+      throw AuthenticationError;
+    },
+
+    //addProduct
   },
 };
 

@@ -4,9 +4,11 @@ import App from './App.jsx'
 import {createBrowserRouter, RouterProvider} from 'react-router-dom'
 
 import 'tailwindcss/tailwind.css';
+
 import './styles/index.css'
+
 import Home from './pages/Home.jsx';
-import NotFound from './pages/notfound.jsx';
+import NotFound from './pages/NotFound.jsx';
 
 const router = createBrowserRouter([
   {
