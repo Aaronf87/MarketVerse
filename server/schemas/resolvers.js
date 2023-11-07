@@ -1,5 +1,5 @@
 const { async } = require("rxjs");
-const { User, Product, Order, Category, Product } = require("../models");
+const { User, Product, Order, Category } = require("../models");
 const { signToken, AuthenticationError } = require("../utils/auth");
 require("dotenv").config();
 
