@@ -32,9 +32,9 @@ const seedDatabase = async () => {
 
     // DROP EXISTING COLLECTIONS FROM THE DATABASE (IF ANY EXIST).
     await dropCollectionIfExists("users");
-    await dropCollectionIfExists("orders");
-    await dropCollectionIfExists("products");
     await dropCollectionIfExists("categories");
+    await dropCollectionIfExists("products");
+    await dropCollectionIfExists("orders");
 
     // SEED THE USER COLLECTION WITH RANDOM USERS AND EMAILS.
     const users = [];
@@ -150,9 +150,24 @@ const seedDatabase = async () => {
 
     // CREATE THE ORDER COLLECTION WITH ORDERS.
     await Order.collection.insertMany(orders);
+    const seededOrders = await serializeData(Order);
+
+    for (const order of seededOrders) {
+      const userId = order.userId;
+      const _id = order._id;
+
+      // UPDATE THE USER'S IN USER COLLECTION WITH ORDER ID'S BASED ON USER ID
+      await User.findByIdAndUpdate(
+        userId,
+        {
+          $push: { orders: _id },
+        },
+        { new: true }
+      );
+    }
 
     console.log(chalk.bold.green`\n===========================================================`);
-    console.log(chalk.bold.green`CREATED ${chalk.bold.magenta`ORDER`} COLLECTION: SEEDED "${chalk.bold.magenta(orders.length)}" ORDERS!`);
+    console.log(chalk.bold.green`CREATED ${chalk.bold.magenta`ORDER`} COLLECTION: SEEDED "${chalk.bold.magenta(orders.length)}" ORDERS AND UPDATED USERS!`);
     console.log(chalk.bold.green`===========================================================`);
 
     console.log(chalk.bold.green`\n===========================================================`);
