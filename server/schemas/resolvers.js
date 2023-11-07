@@ -35,8 +35,11 @@ const resolvers = {
         .select("-__v -password");
     },
 
-    product: async (parent, { _id }) => {
-      return await Product.findById(_id).populate("category");
+    getProduct: async (parent, { _id }) => {
+      return await Product.findById(_id)
+        .populate("category")
+        .populate("userId")
+        .select("-__v -password");
     },
 
     categories: async () => {

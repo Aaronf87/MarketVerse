@@ -56,8 +56,8 @@ errors: [String]
 type Query {
     me: User
     getProducts(category: ID): [Product]
+    getProduct(_id: ID!): Product
 
-    product(_id: ID!): Product
     user: User
     order(_id: ID!): Order
     categories: [Category]
@@ -72,7 +72,6 @@ type Mutation {
     deleteUser(confirm: Boolean!): Response
 
     addOrder(products: [ID]!): Order
-    createCheckoutSession(products: [ProductInput]!): Checkout # This is the new mutation for Stripe
 }
 
 # The input type for the products being passed to the checkout session
