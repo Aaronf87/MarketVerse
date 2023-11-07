@@ -5,72 +5,71 @@ type User {
     lastName: String!
     username: String!
     email: String!
-    password: String!
+    products: [Product]
     orders: [Order]
+    # Removed password field for security reasons
 }
 
-type Book {
-    #! Revisit
+type Product {
     _id: ID
-
-    bookId: ID!
-    authors: [String]
+    user: User!
+    name: String!
     description: String
+    price: Float!
+    quantity: Int
+    category: Category! # Ensure this type is defined
     image: String
-    link: String
-    title: String!
-    price: Float
 }
 
 type Order {
-    #! Revisit
     _id: ID
-
-    #userId: ID!
+    user: User! # Assume that we have a reference to the User object, not just the ID
     purchaseDate: String
-    books: [Book]
+    products: [Product]
     quantity: Int
+    # Consider adding other relevant fields such as order status
 }
 
-type Checkout {
-    session: ID
-  }
+type Category {
+    _id: ID
+    name: String!
+}
 
 type Auth {
     token: ID!
     user: User
 }
 
+type Checkout {
+    session: ID
+}
+
 type Query {
     me: User
     users: [User]
-    user(userId: ID!): User
-    books: [Book]
-    book(bookId: ID!): Book
+    categories: [Category]
+    products(category: ID, name: String): [Product]
+    product(_id: ID!): Product
+    user: User
     order(_id: ID!): Order
-
-    #! Revisit
-    #checkout(items: [BookInput]): Checkout
+    #checkout(products: [ProductInput]): Checkout
 }
 
 type Mutation {
-    login (email: String!, password: String!): Auth
-    addUser (firstName: String!, lastName: String!, username: String!, email: String!, password: String!): Auth
-    addOrder (books: [ID]!): Order
+    login(email: String!, password: String!): Auth
+    addUser(firstName: String!, lastName: String!, username: String!, email: String!, password: String!): Auth
+    addOrder(products: [ID]!): Order
+    createCheckoutSession(products: [ProductInput]!): Checkout # This is the new mutation for Stripe
+}
+
+# The input type for the products being passed to the checkout session
+input ProductInput {
+    id: ID!
+    quantity: Int!
 }
 
 `;
 
 module.exports = typeDefs;
 
-// type Mutation {
-//     login(email: String!, password: String!): Auth
-//     addUser(firstName: String!, lastName: String!, username: String!, email: String!, password: String!): Auth
-//     updateUser(firstName: String, lastName: String, username: String, email: String, password: String): User
-//     removeUser(userId: ID!): User
-//     addBook(bookId: ID!, authors: [String], description: String, image: String, link: String, title: String!, price: Float): Book
-//     removeBook(bookId: ID!): Book
-//     addCart(userId: ID!, purchaseDate: String, books: [Book], quantity: Int): Cart
-//     updateCart(userId: ID!, purchaseDate: String, books: [Book], quantity: Int): Cart
-//     removeCart(userId: ID!): Cart
-// }
+

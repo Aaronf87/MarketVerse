@@ -1,23 +1,23 @@
 const { Schema, model } = require("mongoose");
 
 const orderSchema = new Schema({
-  // userId: {
-  //   type: Schema.Types.ObjectId,
-  //   ref: "User",
-  //   required: true,
-  // },
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
   purchaseDate: {
     type: Date,
     default: Date.now,
   },
-  items: [
+  products: [
     {
-      // This is expecting an array of ObjectId's from the Book model
+      // This is expecting an array of ObjectId's from the Product model
       type: Schema.Types.ObjectId,
-      ref: "Book",
+      ref: "Product",
     },
   ],
-  quanity: {
+  quantity: {
     type: Number,
     min: 0,
     default: 0,
