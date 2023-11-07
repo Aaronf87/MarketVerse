@@ -63,14 +63,3 @@ type Mutation {
 
 module.exports = typeDefs;
 
-// type Mutation {
-//     login(email: String!, password: String!): Auth
-//     addUser(firstName: String!, lastName: String!, username: String!, email: String!, password: String!): Auth
-//     updateUser(firstName: String, lastName: String, username: String, email: String, password: String): User
-//     removeUser(userId: ID!): User
-//     addBook(bookId: ID!, authors: [String], description: String, image: String, link: String, title: String!, price: Float): Book
-//     removeBook(bookId: ID!): Book
-//     addCart(userId: ID!, purchaseDate: String, books: [Book], quantity: Int): Cart
-//     updateCart(userId: ID!, purchaseDate: String, books: [Book], quantity: Int): Cart
-//     removeCart(userId: ID!): Cart
-// }
