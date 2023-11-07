@@ -8,7 +8,7 @@ type User {
     products: [Product]
     orders: [Order]
     
-    # ! Revisit: Remove password field for security reasons
+    # TODO: Remove password field before deploying
     password: String!
 }
 
@@ -60,7 +60,7 @@ type Query {
     getCategories: [Category]
     getOrder(_id: ID!): Order
 
-    #checkout(products: [ProductInput]): Checkout
+    # TODO: checkout(products: [ProductInput]): Checkout
 }
 
 type Mutation {
@@ -72,12 +72,11 @@ type Mutation {
     addOrder(products: [ID]!): Order
 }
 
-# The input type for the products being passed to the checkout session
+# TODO: The input type for the products being passed to the checkout session
 input ProductInput {
     id: ID!
     quantity: Int!
 }
-
 `;
 
 module.exports = typeDefs;

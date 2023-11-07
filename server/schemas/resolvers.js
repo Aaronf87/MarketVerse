@@ -1,4 +1,3 @@
-const { async } = require("rxjs");
 const { User, Product, Order, Category } = require("../models");
 const { signToken, AuthenticationError } = require("../utils/auth");
 require("dotenv").config();
@@ -18,7 +17,6 @@ const resolvers = {
 
         return userData;
       }
-
       throw new AuthenticationError();
     },
 
@@ -67,8 +65,11 @@ const resolvers = {
 
         return order;
       }
-
       throw new AuthenticationError("User not authenticated");
+    },
+
+    checkout: async (parent, args, context) => {
+      // TODO: Create Checkout Resolver. See stripe documentation for more information.
     },
   },
 

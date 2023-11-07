@@ -1,6 +1,4 @@
 const { Schema, model } = require("mongoose");
-const Order = require("./Order");
-const Product = require("./Product");
 
 const bcrypt = require("bcrypt");
 
