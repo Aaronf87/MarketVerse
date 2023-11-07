@@ -1,3 +1,4 @@
+const { async } = require("rxjs");
 const { User, Product, Order, Category, Product } = require("../models");
 const { signToken, AuthenticationError } = require("../utils/auth");
 require("dotenv").config();
@@ -25,18 +26,38 @@ const resolvers = {
     product: async (parent,{_id}) => {
       return await Product.findById(_id).populate('category');
     },
+    me: async (parent, args, context) => {
+      if (context.user) {
+        const userData = await User.findOne({ _id: context.user._id })
+          .select("-__v -password")
+        //   .populate("order");
 
-    // me: async (parent, args, context) => {
-    //   if (context.user) {
-    //     const userData = await User.findOne({ _id: context.user._id })
-    //       .select("-__v -password")
-    //     //   .populate("order");
+        return userData;
+      }
 
-    //     return userData;
-    //   }
-
-    //   throw new AuthenticationError();
-    // },
+      throw new AuthenticationError();
+    },
+    user: async (parent, args, context) => { 
+      if (context.user) { 
+        const user = await User.findById(context.user._id).populate({
+          path: 'orders.products',
+          populate: 'category'
+        });
+        return user;
+      }
+      throw AuthenticationError;
+    },
+    order: async (parent, { _id }, context) => {
+      if (context.user) {
+        const user = await User.findById(context.user._id).populate({
+          path: 'order.products',
+          populate: 'category'
+        });
+        return user.order.id(_id);
+      }
+      throw AuthenticationError;
+    },
+    // checkout query TODO.
   },
 
   Mutation: {
