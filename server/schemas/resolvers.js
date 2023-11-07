@@ -6,6 +6,7 @@ require("dotenv").config();
 
 const resolvers = {
   Query: {
+    // GET CURRENT USER DATA
     me: async (parent, args, context) => {
       if (context.user) {
         const userData = await User.findOne({ _id: context.user._id })
@@ -20,6 +21,7 @@ const resolvers = {
       throw new AuthenticationError();
     },
 
+    // GET ALL PRODUCTS OR PRODUCTS BY CATEGORY
     getProducts: async (parent, { category }) => {
       const params = {};
 
@@ -33,6 +35,7 @@ const resolvers = {
         .select("-__v -password");
     },
 
+    // GET ONE PRODUCT BY ID
     getProduct: async (parent, { _id }) => {
       return await Product.findById(_id)
         .populate("category")
@@ -40,10 +43,12 @@ const resolvers = {
         .select("-__v -password");
     },
 
+    // GET ALL CATEGORIES
     getCategories: async () => {
       return await Category.find();
     },
 
+    // GET ONE "CURRENT" USER ORDER BY ID (MUST BE LOGGED IN).
     getOrder: async (parent, { _id }, context) => {
       if (context.user) {
         const order = await Order.findOne({ _id: _id })
@@ -68,12 +73,13 @@ const resolvers = {
       throw new AuthenticationError("User not authenticated");
     },
 
-    checkout: async (parent, args, context) => {
-      // TODO: Create Checkout Resolver. See stripe documentation for more information.
-    },
+    // checkout: async (parent, args, context) => {
+    // TODO: Create Checkout Resolver. See stripe documentation for more information.
+    // },
   },
 
   Mutation: {
+    // LOGIN USER
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
 
@@ -92,6 +98,7 @@ const resolvers = {
       return { token, user };
     },
 
+    // CREATE A NEW USER
     addUser: async (parent, args) => {
       try {
         const user = await User.create(args);
@@ -102,6 +109,7 @@ const resolvers = {
       }
     },
 
+    // UPDATE CURRENT USER
     updateUser: async (parent, args, context) => {
       if (context.user) {
         return await User.findByIdAndUpdate(context.user._id, args, {
@@ -111,6 +119,7 @@ const resolvers = {
       throw AuthenticationError;
     },
 
+    // DELETE CURRENT USER
     deleteUser: async (parent, { confirm }, context) => {
       if (context.user) {
         if (confirm) {
@@ -141,18 +150,33 @@ const resolvers = {
       throw new AuthenticationError("User not authenticated");
     },
 
-    addOrder: async (parent, { products }, context) => {
+    addProduct: async (parent, args, context) => {
       if (context.user) {
-        const order = new Order({ products });
-        await User.findByIdAndUpdate(context.user._id, {
-          $push: { orders: order },
-        });
-        return order;
+        try {
+          const product = await Product.create({
+            ...args,
+            userId: context.user._id,
+          });
+
+          await User.findByIdAndUpdate(
+            context.user._id,
+            { $push: { products: product._id } },
+            { new: true }
+          );
+
+          return product;
+        } catch {
+          throw new Error("Failed to create product!");
+        }
       }
-      throw AuthenticationError;
+      throw new AuthenticationError("User not authenticated");
     },
 
-    //addProduct
+    // updateProduct: async (parent, args, context) => {},
+
+    // deleteProduct: async (parent, { _id }, context) => {},
+
+    // addOrder: async (parent, args, context) => {},
   },
 };
 

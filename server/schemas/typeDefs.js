@@ -1,4 +1,5 @@
 const typeDefs = `#graphql
+
 type User {
     _id: ID
     firstName: String!
@@ -69,7 +70,14 @@ type Mutation {
     updateUser(firstName: String, lastName: String, username: String, email: String, password: String): User
     deleteUser(confirm: Boolean!): Response
 
-    addOrder(products: [ID]!): Order
+    addProduct(name: String!, description: String, price: Float!, quantity: Int, category: ID!, image: String): Product
+    
+    #updateProduct(_id: ID!, name: String, description: String, price: Float, quantity: Int, category: ID, image: String): Product
+    #deleteProduct(_id: ID!): Response
+
+    #addOrder(products: [ID]!): Order
+
+
 }
 
 # TODO: The input type for the products being passed to the checkout session
