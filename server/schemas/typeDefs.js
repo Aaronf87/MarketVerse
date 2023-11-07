@@ -47,6 +47,7 @@ type Auth {
     user: User
 }
 
+# Response for Delete Mutation
 type Response {
 data: String
 errors: [String]
@@ -54,6 +55,7 @@ errors: [String]
 
 type Query {
     me: User
+    
     users: [User]
     categories: [Category]
     products(category: ID, name: String): [Product]

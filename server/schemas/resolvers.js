@@ -26,12 +26,15 @@ const resolvers = {
     product: async (parent, { _id }) => {
       return await Product.findById(_id).populate("category");
     },
+    
     me: async (parent, args, context) => {
       if (context.user) {
-        const userData = await User.findOne({ _id: context.user._id }).select(
-          "-__v -password"
-        );
-        //   .populate("order");
+        const userData = await User.findOne({ _id: context.user._id })
+          .select("-__v -password")
+          .populate("products")
+          .populate("orders")
+          .populate({ path: "products", populate: "category" })
+          .populate({ path: "orders", populate: "products" });
 
         return userData;
       }
