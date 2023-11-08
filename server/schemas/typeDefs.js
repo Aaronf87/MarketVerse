@@ -71,14 +71,9 @@ type Mutation {
     deleteUser(confirm: Boolean!): Response
     addProduct(name: String!, description: String, price: Float!, quantity: Int, category: ID!, image: String): Product
     updateProduct(_id: ID!, name: String, description: String, price: Float, quantity: Int, category: ID, image: String): Product
-
-
-    
-    #deleteProduct(_id: ID!): Response
+    deleteProduct(_id: ID!, confirm: Boolean!): Response
 
     #addOrder(products: [ID]!): Order
-
-
 }
 
 # TODO: The input type for the products being passed to the checkout session
@@ -89,5 +84,3 @@ input ProductInput {
 `;
 
 module.exports = typeDefs;
-
-

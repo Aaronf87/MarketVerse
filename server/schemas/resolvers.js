@@ -137,7 +137,7 @@ const resolvers = {
 
             // Return a message indicating successful deletion
             return {
-              data: `User ${context.user.username} deleted successfully`,
+              data: `User "${context.user.username}" deleted successfully`,
               errors: [],
             };
           } catch (error) {
@@ -177,6 +177,16 @@ const resolvers = {
     updateProduct: async (parent, args, context) => {
       if (context.user) {
         try {
+          // VERIFY USER PERMISSION TO UPDATE PRODUCT
+          const verifyProduct = await Product.findById(args._id);
+
+          if (verifyProduct.userId.toString() !== context.user._id) {
+            throw new AuthenticationError(
+              "You do not have permission to update this product"
+            );
+          }
+
+          // FIND PRODUCT BY ID AND UPDATE IT
           const product = await Product.findOneAndUpdate(
             { _id: args._id },
             { ...args },
@@ -191,7 +201,48 @@ const resolvers = {
       throw AuthenticationError;
     },
 
-    // deleteProduct: async (parent, { _id }, context) => {},
+    // DELETE A PRODUCT FOR THE CURRENT USER (MUST BE LOGGED IN)
+    deleteProduct: async (parent, { _id, confirm }, context) => {
+      if (context.user) {
+        if (confirm) {
+          try {
+            // VERIFY USER PERMISSIONS TO DELETE PRODUCT
+            const verifyProduct = await Product.findById(_id);
+
+            if (verifyProduct.userId.toString() !== context.user._id) {
+              throw new AuthenticationError(
+                "You do not have permission to delete this product"
+              );
+            }
+
+            // FIND PRODUCT BY ID AND DELETE IT
+            const deletedProduct = await Product.findByIdAndDelete(_id);
+
+            if (!deletedProduct) {
+              throw new Error("Product not found.");
+            }
+
+            // REMOVE PRODUCT FROM USER'S PRODUCTS ARRAY
+            await User.findByIdAndUpdate(
+              context.user._id,
+              { $pull: { products: deletedProduct._id } },
+              { new: true }
+            );
+
+            // RETURN A MESSAGE INDICATING SUCCESSFUL DELETION
+            return {
+              data: `Product "${deletedProduct.name}" deleted successfully`,
+              errors: [],
+            };
+          } catch (err) {
+            throw new Error("Failed to delete product!");
+          }
+        } else {
+          throw new Error("You must confirm deletion!");
+        }
+      }
+      throw AuthenticationError;
+    },
 
     // addOrder: async (parent, args, context) => {},
   },
