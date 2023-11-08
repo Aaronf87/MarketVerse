@@ -1,4 +1,5 @@
 const typeDefs = `#graphql
+
 type User {
     _id: ID
     firstName: String!
@@ -8,7 +9,7 @@ type User {
     products: [Product]
     orders: [Order]
     
-    # ! Revisit: Remove password field for security reasons
+    # TODO: Remove password field before deploying
     password: String!
 }
 
@@ -49,8 +50,8 @@ type Auth {
 
 # Response for Delete Mutation
 type Response {
-data: String
-errors: [String]
+    data: String
+    errors: [String]
 }
 
 type Query {
@@ -60,7 +61,7 @@ type Query {
     getCategories: [Category]
     getOrder(_id: ID!): Order
 
-    #checkout(products: [ProductInput]): Checkout
+    # TODO: checkout(products: [ProductInput]): Checkout
 }
 
 type Mutation {
@@ -68,18 +69,18 @@ type Mutation {
     addUser(firstName: String!, lastName: String!, username: String!, email: String!, password: String!): Auth
     updateUser(firstName: String, lastName: String, username: String, email: String, password: String): User
     deleteUser(confirm: Boolean!): Response
+    addProduct(name: String!, description: String, price: Float!, quantity: Int, category: ID!, image: String): Product
+    updateProduct(_id: ID!, name: String, description: String, price: Float, quantity: Int, category: ID, image: String): Product
+    deleteProduct(_id: ID!, confirm: Boolean!): Response
 
-    addOrder(products: [ID]!): Order
+    #addOrder(products: [ID]!): Order
 }
 
-# The input type for the products being passed to the checkout session
+# TODO: The input type for the products being passed to the checkout session
 input ProductInput {
     id: ID!
     quantity: Int!
 }
-
 `;
 
 module.exports = typeDefs;
-
-

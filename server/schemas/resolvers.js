@@ -1,4 +1,3 @@
-const { async } = require("rxjs");
 const { User, Product, Order, Category } = require("../models");
 const { signToken, AuthenticationError } = require("../utils/auth");
 require("dotenv").config();
@@ -7,6 +6,7 @@ require("dotenv").config();
 
 const resolvers = {
   Query: {
+    // GET CURRENT USER DATA
     me: async (parent, args, context) => {
       if (context.user) {
         const userData = await User.findOne({ _id: context.user._id })
@@ -18,10 +18,10 @@ const resolvers = {
 
         return userData;
       }
-
-      throw new AuthenticationError();
+      throw AuthenticationError;
     },
 
+    // GET ALL PRODUCTS OR PRODUCTS BY CATEGORY
     getProducts: async (parent, { category }) => {
       const params = {};
 
@@ -35,6 +35,7 @@ const resolvers = {
         .select("-__v -password");
     },
 
+    // GET ONE PRODUCT BY ID
     getProduct: async (parent, { _id }) => {
       return await Product.findById(_id)
         .populate("category")
@@ -42,10 +43,12 @@ const resolvers = {
         .select("-__v -password");
     },
 
+    // GET ALL CATEGORIES
     getCategories: async () => {
       return await Category.find();
     },
 
+    // GET ONE "CURRENT" USER ORDER BY ID (MUST BE LOGGED IN).
     getOrder: async (parent, { _id }, context) => {
       if (context.user) {
         const order = await Order.findOne({ _id: _id })
@@ -67,12 +70,16 @@ const resolvers = {
 
         return order;
       }
-
-      throw new AuthenticationError("User not authenticated");
+      throw AuthenticationError;
     },
+
+    // checkout: async (parent, args, context) => {
+    // TODO: Create Checkout Resolver. See stripe documentation for more information.
+    // },
   },
 
   Mutation: {
+    // LOGIN USER
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
 
@@ -91,6 +98,7 @@ const resolvers = {
       return { token, user };
     },
 
+    // CREATE A NEW USER
     addUser: async (parent, args) => {
       try {
         const user = await User.create(args);
@@ -101,6 +109,7 @@ const resolvers = {
       }
     },
 
+    // UPDATE CURRENT USER
     updateUser: async (parent, args, context) => {
       if (context.user) {
         return await User.findByIdAndUpdate(context.user._id, args, {
@@ -110,6 +119,7 @@ const resolvers = {
       throw AuthenticationError;
     },
 
+    // DELETE CURRENT USER
     deleteUser: async (parent, { confirm }, context) => {
       if (context.user) {
         if (confirm) {
@@ -127,7 +137,7 @@ const resolvers = {
 
             // Return a message indicating successful deletion
             return {
-              data: `User ${context.user.username} deleted successfully`,
+              data: `User "${context.user.username}" deleted successfully`,
               errors: [],
             };
           } catch (error) {
@@ -137,21 +147,104 @@ const resolvers = {
           throw new Error("You must confirm deletion!");
         }
       }
-      throw new AuthenticationError("User not authenticated");
+      throw AuthenticationError;
     },
 
-    addOrder: async (parent, { products }, context) => {
+    // ADD A NEW PRODUCT FOR THE CURRENT USER (MUST BE LOGGED IN)
+    addProduct: async (parent, args, context) => {
       if (context.user) {
-        const order = new Order({ products });
-        await User.findByIdAndUpdate(context.user._id, {
-          $push: { orders: order },
-        });
-        return order;
+        try {
+          const product = await Product.create({
+            ...args,
+            userId: context.user._id,
+          });
+
+          await User.findByIdAndUpdate(
+            context.user._id,
+            { $push: { products: product._id } },
+            { new: true }
+          );
+
+          return product;
+        } catch (err) {
+          throw new Error("Failed to create product!");
+        }
       }
       throw AuthenticationError;
     },
 
-    //addProduct
+    // UPDATE A PRODUCT FOR THE CURRENT USER (MUST BE LOGGED IN)
+    updateProduct: async (parent, args, context) => {
+      if (context.user) {
+        try {
+          // VERIFY USER PERMISSION TO UPDATE PRODUCT
+          const verifyProduct = await Product.findById(args._id);
+
+          if (verifyProduct.userId.toString() !== context.user._id) {
+            throw new AuthenticationError(
+              "You do not have permission to update this product"
+            );
+          }
+
+          // FIND PRODUCT BY ID AND UPDATE IT
+          const product = await Product.findOneAndUpdate(
+            { _id: args._id },
+            { ...args },
+            { new: true }
+          );
+
+          return product;
+        } catch (err) {
+          throw new Error("Failed to update product!");
+        }
+      }
+      throw AuthenticationError;
+    },
+
+    // DELETE A PRODUCT FOR THE CURRENT USER (MUST BE LOGGED IN)
+    deleteProduct: async (parent, { _id, confirm }, context) => {
+      if (context.user) {
+        if (confirm) {
+          try {
+            // VERIFY USER PERMISSIONS TO DELETE PRODUCT
+            const verifyProduct = await Product.findById(_id);
+
+            if (verifyProduct.userId.toString() !== context.user._id) {
+              throw new AuthenticationError(
+                "You do not have permission to delete this product"
+              );
+            }
+
+            // FIND PRODUCT BY ID AND DELETE IT
+            const deletedProduct = await Product.findByIdAndDelete(_id);
+
+            if (!deletedProduct) {
+              throw new Error("Product not found.");
+            }
+
+            // REMOVE PRODUCT FROM USER'S PRODUCTS ARRAY
+            await User.findByIdAndUpdate(
+              context.user._id,
+              { $pull: { products: deletedProduct._id } },
+              { new: true }
+            );
+
+            // RETURN A MESSAGE INDICATING SUCCESSFUL DELETION
+            return {
+              data: `Product "${deletedProduct.name}" deleted successfully`,
+              errors: [],
+            };
+          } catch (err) {
+            throw new Error("Failed to delete product!");
+          }
+        } else {
+          throw new Error("You must confirm deletion!");
+        }
+      }
+      throw AuthenticationError;
+    },
+
+    // addOrder: async (parent, args, context) => {},
   },
 };
 
