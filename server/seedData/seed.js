@@ -146,6 +146,7 @@ const seedDatabase = async () => {
     for (let i = 0; i < 40; i++) {
       const order = createRandomOrder(updatedSeededUsers, seededProducts);
       orders.push(order);
+      console.log(order)
     }
 
     // CREATE THE ORDER COLLECTION WITH ORDERS.

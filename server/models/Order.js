@@ -13,8 +13,14 @@ const orderSchema = new Schema({
   products: [
     {
       // This is expecting an array of ObjectId's from the Product model
-      type: Schema.Types.ObjectId,
-      ref: "Product",
+      product: {
+        type: Schema.Types.ObjectId,
+        ref: "Product",
+      },
+      quantity: {
+        type: Number,
+        default: 1,
+      },
     },
   ],
 });
