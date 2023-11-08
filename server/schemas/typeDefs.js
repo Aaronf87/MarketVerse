@@ -50,8 +50,8 @@ type Auth {
 
 # Response for Delete Mutation
 type Response {
-data: String
-errors: [String]
+    data: String
+    errors: [String]
 }
 
 type Query {
@@ -69,10 +69,11 @@ type Mutation {
     addUser(firstName: String!, lastName: String!, username: String!, email: String!, password: String!): Auth
     updateUser(firstName: String, lastName: String, username: String, email: String, password: String): User
     deleteUser(confirm: Boolean!): Response
-
     addProduct(name: String!, description: String, price: Float!, quantity: Int, category: ID!, image: String): Product
+    updateProduct(_id: ID!, name: String, description: String, price: Float, quantity: Int, category: ID, image: String): Product
+
+
     
-    #updateProduct(_id: ID!, name: String, description: String, price: Float, quantity: Int, category: ID, image: String): Product
     #deleteProduct(_id: ID!): Response
 
     #addOrder(products: [ID]!): Order

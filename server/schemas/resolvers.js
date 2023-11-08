@@ -18,7 +18,7 @@ const resolvers = {
 
         return userData;
       }
-      throw new AuthenticationError();
+      throw AuthenticationError;
     },
 
     // GET ALL PRODUCTS OR PRODUCTS BY CATEGORY
@@ -70,7 +70,7 @@ const resolvers = {
 
         return order;
       }
-      throw new AuthenticationError("User not authenticated");
+      throw AuthenticationError;
     },
 
     // checkout: async (parent, args, context) => {
@@ -147,9 +147,10 @@ const resolvers = {
           throw new Error("You must confirm deletion!");
         }
       }
-      throw new AuthenticationError("User not authenticated");
+      throw AuthenticationError;
     },
 
+    // ADD A NEW PRODUCT FOR THE CURRENT USER (MUST BE LOGGED IN)
     addProduct: async (parent, args, context) => {
       if (context.user) {
         try {
@@ -165,14 +166,30 @@ const resolvers = {
           );
 
           return product;
-        } catch {
+        } catch (err) {
           throw new Error("Failed to create product!");
         }
       }
-      throw new AuthenticationError("User not authenticated");
+      throw AuthenticationError;
     },
 
-    // updateProduct: async (parent, args, context) => {},
+    // UPDATE A PRODUCT FOR THE CURRENT USER (MUST BE LOGGED IN)
+    updateProduct: async (parent, args, context) => {
+      if (context.user) {
+        try {
+          const product = await Product.findOneAndUpdate(
+            { _id: args._id },
+            { ...args },
+            { new: true }
+          );
+
+          return product;
+        } catch (err) {
+          throw new Error("Failed to update product!");
+        }
+      }
+      throw AuthenticationError;
+    },
 
     // deleteProduct: async (parent, { _id }, context) => {},
 
