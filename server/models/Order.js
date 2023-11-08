@@ -17,11 +17,6 @@ const orderSchema = new Schema({
       ref: "Product",
     },
   ],
-  quantity: {
-    type: Number,
-    min: 0,
-    default: 0,
-  },
 });
 
 const Order = model("Order", orderSchema);
