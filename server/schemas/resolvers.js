@@ -244,19 +244,21 @@ const resolvers = {
       throw AuthenticationError;
     },
 
+    // ADD A NEW ORDER FOR THE CURRENT USER (MUST BE LOGGED IN)
     addOrder: async (parent, { products }, context) => {
-      // Product Array ID's for Order
-      console.log(products)
-      // User ID for Order
-      console.log(context.user)
-
       if (context.user) {
         try {
+          const newOrder = await Order.create({
+            userId: context.user._id,
+            products: products,
+          });
 
-          
+          const newOrderData = await Order.findById(newOrder._id)
+            .populate("products")
+            .populate({ path: "products", populate: "category" });
 
-
-        } catch (err){
+          return newOrderData;
+        } catch (err) {
           throw new Error("Failed to create order!");
         }
       }
