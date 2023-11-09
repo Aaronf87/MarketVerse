@@ -1,16 +1,22 @@
+import { ApolloProvider } from "@apollo/client";
+import client from "./utils/apollo.js";
+
+import { Outlet } from "react-router-dom";
+
 import Header from "./components/Header";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
-import { Outlet } from "react-router-dom";
+
 function App() {
+
   return (
-    <>
+    <ApolloProvider client={client}>
       <Header>
         <Nav />
       </Header>
       <Outlet />
       <Footer />
-    </>
+    </ApolloProvider>
   );
 }
 
