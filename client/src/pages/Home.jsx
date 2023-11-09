@@ -1,6 +1,3 @@
-import React, { useState } from 'react';
-import Modal from '../components/Modal'; // Adjust the import path as needed
-
 export default function Home() {
   const [isModalOpen, setModalOpen] = useState(false);
 
