@@ -2,6 +2,12 @@
 export default {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
+    colors: {
+      transparent: 'transparent',
+      current: 'currentColor',
+      'blue': '#06b8bf',
+      'orange': '#f6p31c',
+    },
     screens: {
       "mobile": "576px",
       "large-mobile": "768px",

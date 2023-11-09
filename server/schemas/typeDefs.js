@@ -24,13 +24,21 @@ type Product {
     image: String
 }
 
+type OrderProduct {
+  product: Product
+  quantity: Int  
+}
+
+input OrderInput {
+  product: ID!
+  quantity: Int!
+}
+
 type Order {
     _id: ID
     userId: User!
     purchaseDate: String
-    products: [Product]
-
-    # Consider adding other relevant fields such as order status
+    products: [OrderProduct]
 }
 
 type Category {
@@ -73,7 +81,7 @@ type Mutation {
     addProduct(name: String!, description: String, price: Float!, quantity: Int, category: ID!, image: String): Product
     updateProduct(_id: ID!, name: String, description: String, price: Float, quantity: Int, category: ID, image: String): Product
     deleteProduct(_id: ID!, confirm: Boolean!): Response
-    addOrder(products: [ID]!): Order
+    addOrder(input: [OrderInput]): Order
 }
 `;
 
