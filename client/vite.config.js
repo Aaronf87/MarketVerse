@@ -8,12 +8,12 @@ export default defineConfig({
     port: 3001,
     open: true,
     // ! Revisit | Uncomment when GraphQL is implemented
-    // proxy: {
-    //   "/graphql": {
-    //     target: "http://localhost:3001",
-    //     secure: false,
-    //     changeOrigin: true,
-    //   },
-    // },
+    proxy: {
+      "/graphql": {
+        target: "http://localhost:3001",
+        secure: false,
+        changeOrigin: true,
+      },
+    },
   }
 })
