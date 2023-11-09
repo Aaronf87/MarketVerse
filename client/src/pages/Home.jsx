@@ -1,6 +1,8 @@
 import { useState } from "react";
 import Modal from "../components/Modal";
 
+import CategoryMenu from "../components/CategoryMenu";
+
 export default function Home() {
   const [isModalOpen, setModalOpen] = useState(false);
 
@@ -20,7 +22,7 @@ export default function Home() {
 
   return (
     <div>
-          <div className="hover:bg-sky-700 p-7 " href="">
+      <div className="hover:bg-sky-700 p-7 " href="">
         <div>
           <div>
             <dt className="text-3xl p-3">Hero Image</dt>
@@ -33,21 +35,8 @@ export default function Home() {
           </div>
         </div>
       </div>
-      < div className=" p-10">
-      <a className="card" href="">
-        <div>
-          <div>
-            <dt className="text-3xl p-3">Product categories</dt>
-            <img
-              className="rounded"
-              src={`https://source.unsplash.com/random/384x512?sig=${Math.random()}
-              `}
-              alt="hero image"
-            />
-          </div>
-        </div>
-      </a>
-      </div>
+
+      <CategoryMenu />
 
       <button onClick={handleOpenModal}>Create Product</button>
       <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
