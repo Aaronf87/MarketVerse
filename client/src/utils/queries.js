@@ -9,12 +9,16 @@ query me {
     username
     email
     products {
+      _id
       name
+      description
       price
       quantity
       category {
+        _id
         name
       }
+      image
     }
     orders {
       _id

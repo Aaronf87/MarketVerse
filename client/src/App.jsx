@@ -9,15 +9,13 @@ import MainContext from "./components/UI/MainContent.jsx";
 import Footer from "./components/Footer";
 
 function App() {
-
   return (
     <ApolloProvider client={client}>
       <Header>
         <Nav />
       </Header>
       <MainContext>
-
-      <Outlet />
+        <Outlet />
       </MainContext>
       <Footer />
     </ApolloProvider>
