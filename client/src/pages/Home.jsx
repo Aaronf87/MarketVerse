@@ -1,3 +1,6 @@
+import { useState } from "react";
+import Modal from "../components/Modal";
+
 export default function Home() {
   const [isModalOpen, setModalOpen] = useState(false);
 
