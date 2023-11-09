@@ -1,5 +1,5 @@
 
-import tailwindConfig from "../../tailwind.config";
+import { Link } from "react-router-dom";
 import Logo from "./Logo";
 
 
@@ -19,8 +19,8 @@ const Header = () => {
                 Login</button>
 
             {/* Sing up button*/}
-            <button type="button" data-te-ripple-init data-te-ripple-color="light" className="bg-[#f6931c] hover:bg-primary-600 focus:bg-primary-600 active:bg-blue-700 mr-3 inline-block rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] ]">
-                Sign up</button>
+            <Link to="/singUp" type="button" data-te-ripple-init data-te-ripple-color="light" className="bg-[#f6931c] hover:bg-primary-600 focus:bg-primary-600 active:bg-blue-700 mr-3 inline-block rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] ]"> 
+                Sign up</Link>
 
             {/* Cart button*/}
             <a className="ml-1 text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 [&.active]:text-black/90 dark:[&.active]:text-neutral-400" href="#">

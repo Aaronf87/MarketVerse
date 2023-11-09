@@ -12,6 +12,7 @@ import "./styles/modal.css";
 import Home from "./pages/Home.jsx";
 import Profile from "./pages/Profile.jsx";
 import NotFound from "./pages/NotFound.jsx";
+import SignUp from "./pages/SignUp.jsx";
 
 const router = createBrowserRouter([
   {
@@ -26,7 +27,15 @@ const router = createBrowserRouter([
       {
         path: "/profiles/:profileId",
         element: <Profile />,
-      }
+      },
+      {
+        path: "/signUp",
+        element: <SignUp />
+      },
+      // {
+      //   path: "/login",
+      //   element: <Login />
+      // }
     ],
   },
 ]);
