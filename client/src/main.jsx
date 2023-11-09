@@ -10,6 +10,7 @@ import "./styles/card.css";
 import "./styles/modal.css";
 
 import Home from "./pages/Home.jsx";
+import Profile from "./pages/Profile.jsx";
 import NotFound from "./pages/NotFound.jsx";
 
 const router = createBrowserRouter([
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
         index: true,
         element: <Home />,
       },
+      {
+        path: "/profiles/:profileId",
+        element: <Profile />,
+      }
     ],
   },
 ]);
