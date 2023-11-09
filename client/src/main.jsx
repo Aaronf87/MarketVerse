@@ -6,6 +6,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "tailwindcss/tailwind.css";
 
 import "./styles/index.css";
+import "./styles/card.css";
+import "./styles/modal.css";
 
 import Home from "./pages/Home.jsx";
 import NotFound from "./pages/NotFound.jsx";
