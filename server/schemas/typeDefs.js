@@ -39,8 +39,6 @@ type Order {
     userId: User!
     purchaseDate: String
     products: [OrderProduct]
-
-    # Consider adding other relevant fields such as order status
 }
 
 type Category {
