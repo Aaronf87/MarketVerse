@@ -7,6 +7,7 @@ import Header from "./components/Header";
 import Nav from "./components/Nav";
 import MainContext from "./components/UI/MainContent.jsx";
 import Footer from "./components/Footer";
+import SingUp from "./pages/SignUp.jsx";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Outlet />
       </MainContext>
       <Footer />
+      <SingUp />
     </ApolloProvider>
   );
 }
