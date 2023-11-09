@@ -2,7 +2,7 @@ const { User, Product, Order, Category } = require("../models");
 const { signToken, AuthenticationError } = require("../utils/auth");
 require("dotenv").config();
 
-// const stripe = require("stripe")(`${process.env.STRIPE_SECRET}`);
+// TODO: const stripe = require("stripe")(`${process.env.STRIPE_SECRET}`);
 
 const resolvers = {
   Query: {
@@ -244,7 +244,26 @@ const resolvers = {
       throw AuthenticationError;
     },
 
-    // addOrder: async (parent, args, context) => {},
+    // ADD A NEW ORDER FOR THE CURRENT USER (MUST BE LOGGED IN)
+    addOrder: async (parent, { products }, context) => {
+      if (context.user) {
+        try {
+          const newOrder = await Order.create({
+            userId: context.user._id,
+            products: products,
+          });
+
+          const newOrderData = await Order.findById(newOrder._id)
+            .populate("products")
+            .populate({ path: "products", populate: "category" });
+
+          return newOrderData;
+        } catch (err) {
+          throw new Error("Failed to create order!");
+        }
+      }
+      throw AuthenticationError;
+    },
   },
 };
 

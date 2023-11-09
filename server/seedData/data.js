@@ -167,15 +167,12 @@ const createRandomOrder = (users, products) => {
   const validUsers = users.filter(user => user.products.length > 0); // Exclude users with no products
   const userId = getRandomItem(validUsers)._id;
 
-  // Select a random product and ensure the order quantity doesn't exceed the available quantity
+  // Select a random product as the productId
   const selectedProduct = getRandomItem(products);
-  const maxOrderQuantity = selectedProduct.quantity;
-  const orderQuantity = Math.floor(Math.random() * maxOrderQuantity) + 1;
 
   return {
     userId,
     products: [selectedProduct._id],
-    quantity: orderQuantity,
   };
 };
 
