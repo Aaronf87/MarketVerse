@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Modal from "../components/Modal";
 
+
 export default function Home() {
   const [isModalOpen, setModalOpen] = useState(false);
 
@@ -20,7 +21,27 @@ export default function Home() {
 
   return (
     <div>
-      <h1>Home Page here!</h1>
+    
+    <a
+        className="hover:bg-sky-700 card"
+        href=""
+      >
+        <div>
+          <div>
+            <dt className="text-3xl p-3">Placeholder card</dt>
+            <img
+              className="rounded"
+              src={`https://source.unsplash.com/random/384x512?sig=${Math.floor}
+              `}
+              alt="photo of product"
+              width="384"
+              height="512"
+            />
+          </div>
+          
+        </div>
+      </a>
+
       <button onClick={handleOpenModal}>Create Product</button>
       <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
   <div>
