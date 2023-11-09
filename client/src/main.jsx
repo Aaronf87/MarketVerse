@@ -1,18 +1,18 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import {createBrowserRouter, RouterProvider} from 'react-router-dom'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App.jsx";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import 'tailwindcss/tailwind.css';
+import "tailwindcss/tailwind.css";
 
-import './styles/index.css'
+import "./styles/index.css";
 
-import Home from './pages/Home.jsx';
-import NotFound from './pages/NotFound.jsx';
+import Home from "./pages/Home.jsx";
+import NotFound from "./pages/NotFound.jsx";
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <App />,
     errorElement: <NotFound />,
     children: [
@@ -23,6 +23,7 @@ const router = createBrowserRouter([
     ],
   },
 ]);
-ReactDOM.createRoot(document.getElementById('root')).render(
+
+ReactDOM.createRoot(document.getElementById("root")).render(
   <RouterProvider router={router} />
-)
+);

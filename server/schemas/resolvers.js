@@ -14,7 +14,10 @@ const resolvers = {
           .populate("products")
           .populate("orders")
           .populate({ path: "products", populate: "category" })
-          .populate({ path: "orders", populate: "products" });
+          .populate({
+            path: "orders",
+            populate: { path: "products.product", model: "Product" },
+          });
 
         return userData;
       }
@@ -245,17 +248,19 @@ const resolvers = {
     },
 
     // ADD A NEW ORDER FOR THE CURRENT USER (MUST BE LOGGED IN)
-    addOrder: async (parent, { products }, context) => {
+    addOrder: async (parent, { input }, context) => {
       if (context.user) {
         try {
           const newOrder = await Order.create({
             userId: context.user._id,
-            products: products,
+            products: input,
           });
 
           const newOrderData = await Order.findById(newOrder._id)
-            .populate("products")
-            .populate({ path: "products", populate: "category" });
+          .populate({
+            path: "products.product",
+            model: "Product" ,
+          });
 
           return newOrderData;
         } catch (err) {
