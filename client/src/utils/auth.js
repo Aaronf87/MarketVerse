@@ -1,48 +1,37 @@
 import decode from 'jwt-decode';
 
-const AuthService = {
-  getUserToken: () => {
-    return decode(getToken());
-  },
+class AuthService {
+  getProfile() {
+    return decode(this.getToken());
+  }
 
-  loggedIn: () => {
-    const token = getToken();
-    return token && !isTokenExpired(token) ? true : false;
-  },
+  loggedIn() {
+    const token = this.getToken();
+    return token && !this.isTokenExpired(token) ? true : false;
+  }
 
-  isTokenExpired: (token) => {
+  isTokenExpired(token) {
     const decoded = decode(token);
     if (decoded.exp < Date.now() / 1000) {
       localStorage.removeItem('id_token');
       return true;
     }
     return false;
-  },
+  }
 
-  getToken: () => {
+  getToken() {
     return localStorage.getItem('id_token');
-  },
+  }
 
-  login: (idToken) => {
+  login(idToken) {
     localStorage.setItem('id_token', idToken);
-  },
-
-  logout: () => {
-    localStorage.removeItem('id_token');
+    window.location.assign('/');
   }
-};
 
-function getToken() {
-  return localStorage.getItem('id_token');
+  logout() {
+    localStorage.removeItem('id_token');
+    window.location.reload();
+  }
 }
 
-function isTokenExpired(token) {
-  const decoded = decode(token);
-  if (decoded.exp < Date.now() / 1000) {
-    localStorage.removeItem('id_token');
-    return true;
-  }
-  return false;
-}
-
-export default AuthService;
+export default new AuthService();
