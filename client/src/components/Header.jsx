@@ -1,4 +1,5 @@
 
+import tailwindConfig from "../../tailwind.config";
 import Logo from "./Logo";
 
 
@@ -8,17 +9,20 @@ const Header = () => {
     <header className="relative flex w-full flex-wrap items-center justify-between bg-[#FBFBFB] py-5 text-neutral-500 shadow-lg hover:text-neutral-700 focus:text-neutral-700 dark:bg-neutral-600 lg:py-4">
         <div className="flex w-full flex-wrap items-center justify-between px-3">
             <a className="ml-2 text-xl text-neutral-800 dark:text-neutral-200" href="#">MarketVerse</a> 
+
+            {/* Logo */}
             <Logo />
 
-            <div className="flex items-center ">
-            {/* Login */}
+            <div className="flex items-center text ">
+            {/* Login button*/}
             <button type="button" data-te-ripple-init data-te-ripple-color="light" className="text-primary hover:text-primary-600 focus:text-primary-600 active:text-primary-700 mr-3 inline-block rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal transition duration-150 ease-in-out hover:bg-gray-200 focus:outline-none focus:ring-0 motion-reduce:transition-none">
                 Login</button>
 
-
-            <button type="button" data-te-ripple-init data-te-ripple-color="light" className="bg-primary hover:bg-primary-600 focus:bg-primary-600 active:bg-blue-700 mr-3 inline-block rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] ]">
+            {/* Sing up button*/}
+            <button type="button" data-te-ripple-init data-te-ripple-color="light" className="bg-[#f6931c] hover:bg-primary-600 focus:bg-primary-600 active:bg-blue-700 mr-3 inline-block rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] ]">
                 Sign up</button>
 
+            {/* Cart button*/}
             <a className="ml-1 text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 [&.active]:text-black/90 dark:[&.active]:text-neutral-400" href="#">
                 <span className="[&>svg]:w-5">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5">
