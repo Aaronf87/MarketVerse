@@ -1,10 +1,13 @@
 import { useState } from "react";
 import Modal from "../components/Modal";
+import { useQuery } from "@apollo/client";
+import { QUERY_CATEGORIES } from "../utils/queries";
 
 import CategoryMenu from "../components/CategoryMenu";
 
-export default function Home() {
+export default function Home() { 
   const [isModalOpen, setModalOpen] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState(''); // Add this state to track selected category
 
   const handleOpenModal = () => {
     setModalOpen(true);
@@ -14,11 +17,23 @@ export default function Home() {
     setModalOpen(false);
   };
 
-  const handleProductSubmit = (productData) => {
+  const handleCategoryChange = (event) => { // Handler for category change
+    setSelectedCategory(event.target.value);
+  };
+
+  const handleProductSubmit = (event) => {
+    event.preventDefault();
+    const productData = new FormData(event.target);
     // TODO: Implement product submission logic here
     console.log(productData);
     handleCloseModal(); // Close the modal after submission
   };
+
+  const { loading, data } = useQuery(QUERY_CATEGORIES);
+  const categoryData = data?.getCategories || [];
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div>
@@ -38,17 +53,25 @@ export default function Home() {
 
       <CategoryMenu />
 
-      <button onClick={handleOpenModal}>Create Product</button>
-      <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
-        <div>
-          <h2>Create a Product</h2>
-          <form
-            onSubmit={(event) => {
-              event.preventDefault();
-              const productData = new FormData(event.target);
-              handleProductSubmit(productData);
-            }}
-          >
+<button onClick={handleOpenModal}>Create Product</button>
+<Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+  <div>
+    <h2>Create a Product</h2>
+    <form onSubmit={handleProductSubmit}>
+      {/* Category Dropdown */}
+      <select
+        name="category"
+        value={selectedCategory} // Controlled component with value set to state
+        onChange={handleCategoryChange} // Update state when the select value changes
+        required
+      >
+        <option value="" disabled>Select a Category</option>
+        {categoryData.map((category) => (
+          <option key={category._id} value={category._id}>
+            {category.name}
+          </option>
+        ))}
+      </select>
             <input
               type="text"
               name="name"
