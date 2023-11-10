@@ -19,7 +19,8 @@ export default function Login() {
             const { data } = await loginUser({
                 variables: { ...formState },
             });
-            Auth.login(data.loginUser.token);
+            console.log(data);
+            Auth.login(data.login.token);
         } catch (err) {
             console.log(err);
         }
@@ -99,6 +100,7 @@ export default function Login() {
                     <div className="mb-5 w-full px-3">
                       <button
                         type="submit"
+                        onSubmit={handleFormSubmit}
                         className="mx-auto block w-full max-w-xs rounded-lg bg-orange-500 px-3 py-3 font-semibold text-white hover:bg-orange-600 focus:bg-orange-600"
                       >
                         LOGIN

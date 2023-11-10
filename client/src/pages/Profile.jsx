@@ -15,6 +15,19 @@ import { FaUserCircle } from "react-icons/fa";
 import "../styles/Profile.css";
 
 export default function Profile() {
+  const [updatedName, setUpdatedName] = useState("");
+  const [updatedPrice, setUpdatedPrice] = useState("");
+  const [updatedDescription, setUpdatedDescription] = useState("");
+  const [selectedProduct, setSelectedProduct] = useState(null);
+
+  useEffect(() => {
+    if (selectedProduct) {
+      setUpdatedName(selectedProduct.name);
+      setUpdatedPrice(selectedProduct.price);
+      setUpdatedDescription(selectedProduct.description);
+    }
+  }, [selectedProduct]);
+
   const { loading, data } = useQuery(QUERY_ME);
 
   const [updateProduct] = useMutation(UPDATE_PRODUCT);
@@ -55,21 +68,28 @@ export default function Profile() {
   };
 
   const handleEdit = (productId) => {
-    console.log(productId);
     setEditMode(productId);
+    setSelectedProduct(productId)
   };
 
-  const handleUpdate = async (productId, newName, newPrice, newDescription) => {
+  const handleUpdate = async (productId) => {
+    console.log({
+      id: productId,
+      name: updatedName,
+      price: updatedPrice, // Fixed variable name
+      description: updatedDescription, // Fixed variable name
+    });
+
     try {
       await updateProduct({
         variables: {
           id: productId,
-          name: newName,
-          price: newPrice,
-          description: newDescription,
+          name: updatedName,
+          price: updatedPrice, // Fixed variable name
+          description: updatedDescription, // Fixed variable name
         },
       });
-      setEditMode(null); // Exit edit mode after successful update
+      setEditMode(false);
     } catch (err) {
       console.error(err);
     }
@@ -91,12 +111,29 @@ export default function Profile() {
 
             {editMode === product._id ? (
               <>
-                <div className="product-info frost">
-                  <input type="text" defaultValue={product.name} />
-                  <input type="text" defaultValue={product.price} />
-                  <input type="text" defaultValue={product.description} />
-                  <input type="text" defaultValue={product.quantity} />
-                  <button onClick={() => handleUpdate(product._id)}>
+                <div className="product-info frost update-product">
+                  <label htmlFor="name">Name:</label>
+                  <input
+                    type="text"
+                    defaultValue={product.name}
+                    onChange={(e) => setUpdatedName(e.target.value)}
+                  />
+                  <label htmlFor="price">Price:</label>
+                  <input
+                    type="text"
+                    defaultValue={product.price}
+                    onChange={(e) => setUpdatedPrice(e.target.value)}
+                  />
+                  <label htmlFor="description">Description:</label>
+                  <input
+                    type="text"
+                    defaultValue={product.description}
+                    onChange={(e) => setUpdatedDescription(e.target.value)}
+                  />
+                  <button
+                    className="bg-[#f6931c]"
+                    onClick={() => handleUpdate(product._id)}
+                  >
                     Update
                   </button>
                 </div>
