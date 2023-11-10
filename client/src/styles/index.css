@@ -23,12 +23,30 @@
   background-color: #242424;
 }
 
+/* Use Class for Glass Effect */
 .frost {
 /* From https://css.glass */
 background: rgba(255, 255, 255, 0.21);
 box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 backdrop-filter: blur(8.2px);
 -webkit-backdrop-filter: blur(8.2px);
+}
+
+.active {
+  cursor: not-allowed;
+  pointer-events: none;
+  font-weight: bold;
+  color: white;
+  outline: 0.1px solid gray;
+  background-color: black;
+  opacity: 0.8;
+  transform: scale(0.99);
+}
+
+.disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+  opacity: 0.3;
 }
 
 #root {
@@ -71,7 +89,9 @@ p {
   line-height: 1.3;
 }
 
-
+.hide {
+  display: none;
+}
 
 /*! ========================= MAY REMOVE ======================= */
 button {

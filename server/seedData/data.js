@@ -73,24 +73,15 @@ const emailSet = [
 
 const categorySet = [
   "Home",
-  "Electronics",
   "Kitchen",
-  "Baby",
-  "Sports",
-  "Beauty",
-  "Health",
+  "Electronics",
   "Outdoors",
-  "Toys",
-  "Automotive",
   "Books",
   "Movies",
   "Music",
   "Video Games",
-  "Pet Supplies",
   "Tools",
   "Grocery",
-  "Arts",
-  "Antiques",
   "Miscellaneous",
 ];
 
