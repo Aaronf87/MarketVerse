@@ -2,7 +2,7 @@ import { useState } from "react";
 import Modal from "../components/Modal";
 import { useQuery } from "@apollo/client";
 import { QUERY_CATEGORIES } from "../utils/queries";
-
+import hero from "../assets/hero1.png"
 import CategoryMenu from "../components/CategoryMenu";
 
 export default function Home() { 
@@ -40,11 +40,10 @@ export default function Home() {
       <div className="hover:bg-sky-700 p-7 " href="">
         <div>
           <div>
-            <dt className="text-3xl p-3">Hero Image</dt>
+            <dt className="text-3xl p-3 text-center">Hero Image</dt>
             <img
-              className="rounded hero-image"
-              src={`https://source.unsplash.com/random/384x512?sig=${Math.floor}
-              `}
+              className="rounded max-w-full align-center"
+              src ={hero}
               alt="photo of hero image"
             />
           </div>
