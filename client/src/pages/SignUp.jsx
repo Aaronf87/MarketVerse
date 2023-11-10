@@ -77,6 +77,7 @@ export default function SignUp() {
                       <div className="pointer-events-none z-10 flex w-10 items-center justify-center pl-1 text-center"></div>
                       <input
                         className="-ml-10 w-full rounded-lg border-2 border-gray-200 py-2 pl-10 pr-3 outline-none focus:border-orange-500"
+                        placeholder="Juan"
                         type="text"
                         name="firstName"
                         value={formState.firstName}
