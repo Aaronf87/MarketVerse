@@ -19,7 +19,6 @@ function App() {
         <Outlet />
       </MainContext>
       <Footer />
-      <SingUp />
     </ApolloProvider>
   );
 }
