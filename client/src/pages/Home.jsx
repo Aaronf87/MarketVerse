@@ -2,9 +2,8 @@ import { useState } from "react";
 import Modal from "../components/Modal";
 import { useQuery } from "@apollo/client";
 import { QUERY_CATEGORIES } from "../utils/queries";
-import hero from "../assets/hero1.png"
 import CategoryMenu from "../components/CategoryMenu";
-
+import Hero from "../components/UI/hero";
 export default function Home() { 
   const [isModalOpen, setModalOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(''); // Add this state to track selected category
@@ -37,19 +36,7 @@ export default function Home() {
 
   return (
     <div>
-      <div className="hover:bg-sky-700 p-7 " href="">
-        <div>
-          <div>
-            <dt className="text-3xl p-3 text-center">Hero Image</dt>
-            <img
-              className="rounded max-w-full align-center"
-              src ={hero}
-              alt="photo of hero image"
-            />
-          </div>
-        </div>
-      </div>
-
+      <Hero />
       <CategoryMenu />
 
 <button onClick={handleOpenModal}>Create Product</button>
