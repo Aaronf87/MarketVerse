@@ -42,10 +42,10 @@ export default function Home() {
           <div>
             <dt className="text-3xl p-3">Hero Image</dt>
             <img
-              className="rounded"
+              className="rounded hero-image"
               src={`https://source.unsplash.com/random/384x512?sig=${Math.floor}
               `}
-              alt="photo of product"
+              alt="photo of hero image"
             />
           </div>
         </div>
