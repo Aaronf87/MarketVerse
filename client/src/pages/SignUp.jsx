@@ -18,13 +18,15 @@ export default function SignUp() {
     event.preventDefault();
 
     try {
+      console.log("hola");
       const { data } = await addUser({
         variables: { ...formState },
         onCompleted: (data) => {
           Auth.login(data.addUser.token);
         },
+        
       });
-
+      console.log("helloworld")
       console.log(data)
       if (!data) {
         throw new Error("not today");
@@ -46,7 +48,8 @@ export default function SignUp() {
     setFormState({
       ...formState,
       [name]: value,
-    });
+    }); 
+    console.log(formState);
   };
 
   return (
@@ -74,9 +77,19 @@ export default function SignUp() {
           />
         </div>
         <div className="flex-row space-between my-2">
+          <label htmlFor="username">Username:</label>
+          <input
+            placeholder="jhon12"
+            name="username"
+            type="text"
+            value={formState.username}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="flex-row space-between my-2">
           <label htmlFor="email">Email:</label>
           <input
-            placeholder="youremail@verse.com"
+            placeholder="youremail@verse.com3"
             name="email"
             type="email"
             value={formState.email}
