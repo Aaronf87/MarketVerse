@@ -19,7 +19,6 @@ export default function Login() {
             const { data } = await loginUser({
                 variables: { ...formState },
             });
-            console.log(data);
             Auth.login(data.login.token);
         } catch (err) {
             console.log(err);
