@@ -13,6 +13,7 @@ import Home from "./pages/Home.jsx";
 import Profile from "./pages/Profile.jsx";
 import NotFound from "./pages/NotFound.jsx";
 import SignUp from "./pages/SignUp.jsx";
+import Login from "./pages/Login.jsx";
 
 const router = createBrowserRouter([
   {
@@ -32,10 +33,10 @@ const router = createBrowserRouter([
         path: "/signUp",
         element: <SignUp />
       },
-      // {
-      //   path: "/login",
-      //   element: <Login />
-      // }
+      {
+        path: "/login",
+        element: <Login />
+      }
     ],
   },
 ]);
