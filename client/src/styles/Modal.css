@@ -1,26 +1,67 @@
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-  }
-  
-  .modal-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 4px;
-    position: relative;
-  }
-  
-  .modal-close-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-  }
+.modal-form-container {
+  background-color: #f8f8f8;
+  padding: 2em;
+  border-radius: 10px;
+}
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 1em;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: .5em;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: .5em;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.submit-button,
+.modal-close-button {
+  padding: .5em 1em;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold; /* Optional: makes the text bold */
+  text-transform: uppercase; /* Optional: makes the text uppercase */
+}
+
+.submit-button {
+  background-color: #007bff;
+}
+
+.submit-button:hover,
+.submit-button:focus {
+  background-color: #0056b3;
+}
+
+.modal-close-button {
+  background-color: #ff171b;
+}
+
+.modal-close-button:hover,
+.modal-close-button:focus {
+  background-color: #e60000; /* A darker red for hover/focus states */
+}
+
+
+
   

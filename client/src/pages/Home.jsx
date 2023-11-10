@@ -55,50 +55,78 @@ export default function Home() {
 
 <button onClick={handleOpenModal}>Create Product</button>
 <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
-  <div>
-    <h2>Create a Product</h2>
-    <form onSubmit={handleProductSubmit}>
-      {/* Category Dropdown */}
-      <select
-        name="category"
-        value={selectedCategory} // Controlled component with value set to state
-        onChange={handleCategoryChange} // Update state when the select value changes
-        required
-      >
-        <option value="" disabled>Select a Category</option>
-        {categoryData.map((category) => (
-          <option key={category._id} value={category._id}>
-            {category.name}
-          </option>
-        ))}
-      </select>
-            <input
-              type="text"
-              name="name"
-              placeholder="Product Name"
-              required
-            />
-            <textarea
-              name="description"
-              placeholder="Product Description"
-              required
-            />
-            <input
-              type="number"
-              name="price"
-              placeholder="Product Price"
-              required
-            />
-            <input
-              type="number"
-              name="quantity"
-              placeholder="Available Quantity"
-              required
-            />
-            <button type="submit">Submit Product</button>
-          </form>
-        </div>
-      </Modal>
+  <div className="modal-form-container">
+    
+    <form onSubmit={handleProductSubmit} className="modal-form">
+      <div className="form-group">
+        <label htmlFor="category">Category</label>
+        <select
+          id="category"
+          name="category"
+          value={selectedCategory}
+          onChange={handleCategoryChange}
+          required
+        >
+          <option value="" disabled>Select a Category</option>
+          {categoryData.map((category) => (
+            <option key={category._id} value={category._id}>
+              {category.name}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="name">Product Name</label>
+        <input
+          id="name"
+          type="text"
+          name="name"
+          placeholder="Enter the product name"
+          required
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="description">Description</label>
+        <textarea
+          id="description"
+          name="description"
+          placeholder="Describe the product"
+          required
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="price">Price</label>
+        <input
+          id="price"
+          type="number"
+          name="price"
+          placeholder="Set the product price"
+          required
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="quantity">Quantity</label>
+        <input
+          id="quantity"
+          type="number"
+          name="quantity"
+          placeholder="Available quantity"
+          required
+        />
+      </div>
+
+      <div className="form-actions">
+      <button type="button" className="modal-close-button" onClick={handleCloseModal}>×</button>
+        <button type="submit" className="submit-button">Submit Product</button>
+      </div>
+    </form>
+  </div>
+</Modal>
+
     </div>
   );
 }
