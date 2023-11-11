@@ -14,7 +14,7 @@ export default function CategoryMenu() {
 
   return (
     <>
-      <div className=" p-10">
+      {/* <div className=" p-10">
         <a className="card" href="">
           <div>
             <div>
@@ -28,7 +28,7 @@ export default function CategoryMenu() {
             </div>
           </div>
         </a>
-      </div>
+      </div> */}
 
       <CategoryList categoryData={categoryData} />
     </>

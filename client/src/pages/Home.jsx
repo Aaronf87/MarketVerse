@@ -2,8 +2,9 @@ import { useState } from "react";
 import Modal from "../components/Modal";
 import { useQuery } from "@apollo/client";
 import { QUERY_CATEGORIES } from "../utils/queries";
-import CategoryMenu from "../components/CategoryMenu";
 import Hero from "../components/UI/hero";
+import ProductList from "../components/UI/Products";
+
 export default function Home() { 
   const [isModalOpen, setModalOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(''); // Add this state to track selected category
@@ -37,7 +38,8 @@ export default function Home() {
   return (
     <div>
       <Hero />
-      <CategoryMenu />
+      <ProductList />
+     
 
 <button onClick={handleOpenModal}>Create Product</button>
 <Modal isOpen={isModalOpen} onClose={handleCloseModal}>

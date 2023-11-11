@@ -69,7 +69,7 @@ export default function Profile() {
 
   const handleEdit = (productId) => {
     setEditMode(productId);
-    setSelectedProduct(productId)
+    setSelectedProduct(productId);
   };
 
   const handleUpdate = async (productId) => {
