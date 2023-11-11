@@ -12,6 +12,7 @@ export default function SignUp() {
     lastName: "",
     username: "",
   });
+  
   const [addUser] = useMutation(ADD_USER);
 
   const handleFormSubmit = async (event) => {

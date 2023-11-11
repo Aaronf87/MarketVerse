@@ -1,34 +1,64 @@
-import Modal from "./Modal";
+import { useQuery, useMutation } from "@apollo/client";
 import { useState } from "react";
+import Modal from "./Modal";
 
-export default function ModalForm({ categories }) {
+import { ADD_PRODUCT } from "../utils/mutations";
 
-    const [isModalOpen, setModalOpen] = useState(false);
-    const [selectedCategory, setSelectedCategory] = useState(''); // Add this state to track selected category
-  
-    const handleOpenModal = () => {
-      setModalOpen(true);
-    };
-  
-    const handleCloseModal = () => {
-      setModalOpen(false);
-    };
-  
-    const handleCategoryChange = (event) => { // Handler for category change
-      setSelectedCategory(event.target.value);
-    };
-  
-    const handleProductSubmit = (event) => {
-      event.preventDefault();
-      const productData = new FormData(event.target);
-      // TODO: Implement product submission logic here
-      console.log(productData);
-      handleCloseModal(); // Close the modal after submission
-    };
-  
+export default function ModalForm({ categories, QUERY_ME }) {
+  // <======= TOGGLE CREATE MODE: USE-STATE SECTION=======>
+  const [isModalOpen, setModalOpen] = useState(false);
 
-    const categoryData = categories;
+  // <======= CREATE PRODUCT FORM: USE-STATE SECTION=======>
+  const [formState, setFormState] = useState({
+    category: "",
+    name: "",
+    description: "",
+    price: "",
+    quantity: "",
+    image: "",
+  });
 
+  // <======= MUTATION SECTION=======>
+  const [addProduct] = useMutation(ADD_PRODUCT, {
+    refetchQueries: [{ query: QUERY_ME }],
+  });
+
+  // <======= FORM CREATE PRODUCT: HANDLER =======>
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
+    
+    console.log(formState);
+  };
+
+  const handleOpenModal = () => {
+    setModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalOpen(false);
+  };
+
+  // TODO: CREATE LOGIC
+  const handleProductSubmit = (event) => {
+    event.preventDefault();
+
+    console.log("data", {
+      category: formState.category,
+      name: formState.name,
+      description: formState.description,
+      price: formState.price,
+      quantity: formState.quantity,
+      image: formState.image,
+    });
+
+    // handleCloseModal();
+  };
+
+  const categoryData = categories;
 
   return (
     <>
@@ -38,11 +68,12 @@ export default function ModalForm({ categories }) {
           <form onSubmit={handleProductSubmit} className="modal-form">
             <div className="form-group">
               <label htmlFor="category">Category</label>
+
               <select
                 id="category"
                 name="category"
-                value={selectedCategory}
-                onChange={handleCategoryChange}
+                value={formState.category}
+                onChange={handleChange}
                 required
               >
                 <option value="" disabled>
@@ -59,10 +90,12 @@ export default function ModalForm({ categories }) {
             <div className="form-group">
               <label htmlFor="name">Product Name</label>
               <input
+                placeholder="Enter the product name..."
                 id="name"
                 type="text"
                 name="name"
-                placeholder="Enter the product name"
+                value={formState.name}
+                onChange={handleChange}
                 required
               />
             </div>
@@ -70,20 +103,24 @@ export default function ModalForm({ categories }) {
             <div className="form-group">
               <label htmlFor="description">Description</label>
               <textarea
+                placeholder="Describe the product"
                 id="description"
                 name="description"
-                placeholder="Describe the product"
-                required
+                value={formState.description}
+                onChange={handleChange}
               />
             </div>
 
             <div className="form-group">
               <label htmlFor="price">Price</label>
               <input
+                placeholder="Set the product price"
                 id="price"
                 type="number"
+                step="any"
                 name="price"
-                placeholder="Set the product price"
+                value={formState.price}
+                onChange={handleChange}
                 required
               />
             </div>
@@ -91,11 +128,25 @@ export default function ModalForm({ categories }) {
             <div className="form-group">
               <label htmlFor="quantity">Quantity</label>
               <input
+                placeholder="Available quantity..."
                 id="quantity"
                 type="number"
                 name="quantity"
-                placeholder="Available quantity"
+                value={formState.quantity}
+                onChange={handleChange}
                 required
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="quantity">Image</label>
+              <input
+                placeholder="Image URL"
+                id="image"
+                type="text"
+                name="image"
+                value={formState.image}
+                onChange={handleChange}
               />
             </div>
 

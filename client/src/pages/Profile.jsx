@@ -1,5 +1,5 @@
 import { useQuery, useMutation } from "@apollo/client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ModalForm from "../components/ModalForm";
 
 import { QUERY_ME, QUERY_CATEGORIES } from "../utils/queries";
@@ -114,7 +114,7 @@ export default function Profile() {
         <h3>
           {profile.firstName} {profile.lastName}
         </h3>
-        <ModalForm categories={categories} />
+        <ModalForm categories={categories} QUERY_ME={QUERY_ME}/>
       </div>
 
       <div className="product-container">
