@@ -7,10 +7,10 @@
 
 /* EACH PRODUCT CARD */
 .profile-products {
+  width: 350px;
+  height: 400px;
   margin: 10px;
   position: relative;
-  width: 300px;
-  height: 350px;
   border-radius: 10px;
   border: solid 0.5px #bfbfbf;
   box-shadow: 0px 1px 8px -3px rgb(37, 37, 37);
