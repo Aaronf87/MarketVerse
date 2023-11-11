@@ -1,10 +1,8 @@
 import { useQuery, useMutation } from "@apollo/client";
 
-import { useContext } from "react";
-
 import { useEffect, useState } from "react";
 
-import { QUERY_ME } from "../utils/queries";
+import { QUERY_ME, QUERY_CATEGORIES } from "../utils/queries";
 
 import { UPDATE_PRODUCT } from "../utils/mutations";
 import { DELETE_PRODUCT } from "../utils/mutations";
@@ -12,6 +10,7 @@ import { DELETE_PRODUCT } from "../utils/mutations";
 import { FiEdit } from "react-icons/fi";
 import { BsTrash } from "react-icons/bs";
 import { FaUserCircle } from "react-icons/fa";
+import ModalForm from "../components/ModalForm";
 import "../styles/Profile.css";
 
 export default function Profile() {
@@ -28,7 +27,8 @@ export default function Profile() {
     }
   }, [selectedProduct]);
 
-  const { loading, data } = useQuery(QUERY_ME);
+  const { loading: meLoading, data: meData } = useQuery(QUERY_ME);
+  const { loading: categoryLoading, data: categoryData } = useQuery(QUERY_CATEGORIES)
 
   const [updateProduct] = useMutation(UPDATE_PRODUCT);
 
@@ -38,13 +38,15 @@ export default function Profile() {
 
   const [editMode, setEditMode] = useState(false);
 
-  if (loading) {
+  if (meLoading || categoryLoading) {
     return <div>Loading...</div>;
   }
 
-  const profile = data?.me || {};
+  const categories = categoryData?.getCategories || [];
+  const profile = meData?.me || {};
 
-  //   console.log(profile);
+  console.log(categories);
+    // console.log(profile);
 
   const handleDelete = async (e) => {
     const id = e.target.getAttribute("item");
@@ -98,6 +100,19 @@ export default function Profile() {
   return (
     <div className="profile-section">
       <div className="profile-container">
+
+        {/* Modal Test */}
+
+
+        <ModalForm categories={categories} />
+
+
+        {/* Modal Test */}
+
+
+
+
+
         <FaUserCircle className="profile-icon" />
         <h3>
           {profile.firstName} {profile.lastName}

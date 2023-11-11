@@ -1,6 +1,37 @@
 import Modal from "./Modal";
+import { useState } from "react";
+import "../styles/Modal.css";
 
-export default function Something() {
+
+export default function ModalForm({ categories }) {
+
+    const [isModalOpen, setModalOpen] = useState(false);
+    const [selectedCategory, setSelectedCategory] = useState(''); // Add this state to track selected category
+  
+    const handleOpenModal = () => {
+      setModalOpen(true);
+    };
+  
+    const handleCloseModal = () => {
+      setModalOpen(false);
+    };
+  
+    const handleCategoryChange = (event) => { // Handler for category change
+      setSelectedCategory(event.target.value);
+    };
+  
+    const handleProductSubmit = (event) => {
+      event.preventDefault();
+      const productData = new FormData(event.target);
+      // TODO: Implement product submission logic here
+      console.log(productData);
+      handleCloseModal(); // Close the modal after submission
+    };
+  
+
+    const categoryData = categories;
+
+
   return (
     <>
       <button onClick={handleOpenModal}>Create Product</button>
