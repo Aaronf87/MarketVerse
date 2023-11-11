@@ -26,7 +26,7 @@ export default function Hero() {
       </p> */}
 
             <div className="mt-8 flex flex-wrap justify-center gap-4">
-              <button className="w-[10rem]">Sign Up</button>
+            
             </div>
           </div>
         </div>

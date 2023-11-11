@@ -13,7 +13,7 @@
   box-shadow: 2px 2px 2px;
   width: 100%;
   margin: 10px;
-  background-color:#fff;
+  background-color:#cd6d36;
   text-align: center;
   max-width: 250px;
   display: inline-block;
@@ -21,7 +21,7 @@
 }
 .card:hover {
   box-shadow: 3px 3px 3px;
-  background-color: rgba(214, 129, 54, 0.9);
+  background-color: #fff;
   transform: scale(1.1);
 }
 
