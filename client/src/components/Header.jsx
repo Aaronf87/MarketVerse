@@ -11,7 +11,7 @@ const Header = () => {
             <div className="flex w-full flex-wrap items-center justify-between px-3">
                 <Link to="/">
                     {/* Logo */}
-                    <Logo className="ml-2 text-xl text-neutral-800 dark:text-neutral-200" href="" />
+                    <Logo className="ml-2 text-xl text-neutral-800 dark:text-neutral-200" />
                 </Link>
 
                 <div className="flex items-center text ">
