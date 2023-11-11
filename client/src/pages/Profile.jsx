@@ -11,7 +11,6 @@ import { FiEdit } from "react-icons/fi";
 import { BsTrash } from "react-icons/bs";
 import { FaUserCircle } from "react-icons/fa";
 import ModalForm from "../components/ModalForm";
-import "../styles/Profile.css";
 
 export default function Profile() {
   const [updatedName, setUpdatedName] = useState("");

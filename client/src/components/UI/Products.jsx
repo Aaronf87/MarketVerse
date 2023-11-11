@@ -1,16 +1,17 @@
-import Auth from "../../utils/auth";
-import { FaCartPlus } from "react-icons/fa";
 import { useQuery } from "@apollo/client";
 import { QUERY_ALL_PRODUCTS } from "../../utils/queries";
+import Auth from "../../utils/auth";
+
 import CategoryMenu from "../CategoryMenu";
-export default function ProductList({ product }) {
+import { FaCartPlus } from "react-icons/fa";
+
+export default function ProductList() {
   const { loading, data } = useQuery(QUERY_ALL_PRODUCTS);
   const productData = data?.getProducts || [];
 
   if (loading) {
     return <div>Loading...</div>;
   }
-  console.log(productData);
 
   return (
     <div className="grid grid-cols-6 p-5 pt-10">

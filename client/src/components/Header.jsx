@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
 import Logo from "./Logo";
-
 import Auth from "../utils/auth.js";
-
 
 const Header = () => {
 

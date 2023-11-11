@@ -1,7 +1,5 @@
 import Modal from "./Modal";
 import { useState } from "react";
-import "../styles/Modal.css";
-
 
 export default function ModalForm({ categories }) {
 
