@@ -13,7 +13,7 @@ export default function ProductList({ product }) {
   console.log(productData);
 
   return (
-    <div className="grid grid-cols-6">
+    <div className="grid grid-cols-6 p-5 pt-10">
       <div className="category-container col-span-1">
         <CategoryMenu />
       </div>
