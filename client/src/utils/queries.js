@@ -9,12 +9,16 @@ query me {
     username
     email
     products {
+      _id
       name
+      description
       price
       quantity
       category {
+        _id
         name
       }
+      image
     }
     orders {
       _id
@@ -34,10 +38,12 @@ query me {
 export const QUERY_PRODUCTS = gql`
 query getProducts($category: ID) {
   getProducts(category: $category) {
+    _id
     name
     description
     price
     quantity
+    image
     category {
       name
     }
@@ -53,10 +59,12 @@ query getProducts($category: ID) {
 export const QUERY_ALL_PRODUCTS = gql`
 query getProducts {
   getProducts {
+    _id
     name
     description
     price
     quantity
+    image
     category {
       name
     }

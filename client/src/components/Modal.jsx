@@ -1,17 +1,20 @@
+// Modal.jsx
 import React from "react";
-import "../styles/Modal.css"; // Assume you will create a corresponding CSS file for styling
+import "../styles/Modal.css"; // Ensure this is the correct path to your CSS file
 
 const Modal = ({ isOpen, onClose, children }) => {
   if (!isOpen) return null;
 
   return (
     <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content" onClick={e => e.stopPropagation()}>
+      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         {children}
-        <button className="modal-close-button" onClick={onClose}>Close</button>
+        {/* The close button is removed from here */}
       </div>
     </div>
   );
 };
 
 export default Modal;
+
+
