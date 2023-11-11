@@ -58,7 +58,7 @@ export default function Profile() {
       const { data } = await deleteProduct({
         variables: { id, confirm },
       });
-      console.log(data);
+      
     } catch (err) {
       console.error(err);
     }

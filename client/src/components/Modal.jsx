@@ -1,14 +1,10 @@
-import React from "react";
-import "../styles/Modal.css"; 
-
-const Modal = ({ isOpen, onClose, children }) => {
-  if (!isOpen) return null;
+const Modal = ({ isModalOpen, handleToggleModal, children }) => {
+  if (!isModalOpen) return null;
 
   return (
-    <div className="modal-overlay" onClick={onClose}>
+    <div className="modal-overlay" onClick={handleToggleModal}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         {children}
-        {/* The close button is removed from here */}
       </div>
     </div>
   );

@@ -1,14 +1,16 @@
-import { useQuery, useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { useState } from "react";
 import Modal from "./Modal";
 
 import { ADD_PRODUCT } from "../utils/mutations";
 
 export default function ModalForm({ categories, QUERY_ME }) {
-  // <======= TOGGLE CREATE MODE: USE-STATE SECTION=======>
+  const categoryData = categories;
+
+  // <======= USE-STATE: TOGGLE MODAL STATE =======>
   const [isModalOpen, setModalOpen] = useState(false);
 
-  // <======= CREATE PRODUCT FORM: USE-STATE SECTION=======>
+  // <======= USE-STATE: FORM FOR CREATE PRODUCT STATE =======>
   const [formState, setFormState] = useState({
     category: "",
     name: "",
@@ -18,54 +20,66 @@ export default function ModalForm({ categories, QUERY_ME }) {
     image: "",
   });
 
-  // <======= MUTATION SECTION=======>
+  // <======= MUTATION SECTION: ADD PRODUCT =======>
   const [addProduct] = useMutation(ADD_PRODUCT, {
     refetchQueries: [{ query: QUERY_ME }],
   });
 
-  // <======= FORM CREATE PRODUCT: HANDLER =======>
+  // <======= HANDLE CHANGE: UPDATE FORM STATE FOR PRODUCT =======>
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormState({
       ...formState,
       [name]: value,
     });
-    
-    console.log(formState);
   };
 
-  const handleOpenModal = () => {
-    setModalOpen(true);
+  // <======= HANDLER: TOGGLE MODAL (OPEN AND CLOSE) =======>
+  const handleToggleModal = () => {
+    setModalOpen(!isModalOpen);
   };
 
-  const handleCloseModal = () => {
+  // <======= HANDLER: FORM SUBMIT (TO CREATE PRODUCT) =======>
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+
+    const formattedPrice = Math.round(formState.price * 100) / 100;
+    const formattedQuantity = parseInt(formState.quantity);
+
+    try {
+      const { data } = addProduct({
+        variables: {
+          category: formState.category,
+          name: formState.name,
+          description: formState.description,
+          price: formattedPrice,
+          quantity: formattedQuantity,
+          image: formState.image,
+        },
+      });
+    } catch (err) {
+      console.error(err);
+    }
+
+    setFormState({
+      category: "",
+      name: "",
+      description: "",
+      price: "",
+      quantity: "",
+      image: "",
+    });
+
     setModalOpen(false);
   };
 
-  // TODO: CREATE LOGIC
-  const handleProductSubmit = (event) => {
-    event.preventDefault();
-
-    console.log("data", {
-      category: formState.category,
-      name: formState.name,
-      description: formState.description,
-      price: formState.price,
-      quantity: formState.quantity,
-      image: formState.image,
-    });
-
-    // handleCloseModal();
-  };
-
-  const categoryData = categories;
-
   return (
     <>
-      <button onClick={handleOpenModal}>Create Product</button>
-      <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+      <button onClick={handleToggleModal}>Create Product</button>
+
+      <Modal isModalOpen={isModalOpen} handleToggleModal={handleToggleModal}>
         <div className="modal-form-container">
-          <form onSubmit={handleProductSubmit} className="modal-form">
+          <form onSubmit={handleFormSubmit} className="modal-form">
             <div className="form-group">
               <label htmlFor="category">Category</label>
 
@@ -154,7 +168,7 @@ export default function ModalForm({ categories, QUERY_ME }) {
               <button
                 type="button"
                 className="modal-close-button"
-                onClick={handleCloseModal}
+                onClick={handleToggleModal}
               >
                 ×
               </button>
