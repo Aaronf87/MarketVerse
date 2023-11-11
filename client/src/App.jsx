@@ -5,9 +5,6 @@ import { Outlet } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
-import "./styles/Profile.css";
-import "./styles/Modal.css";
-
 function App() {
   return (
     <ApolloProvider client={client}>

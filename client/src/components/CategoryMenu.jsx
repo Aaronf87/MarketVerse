@@ -1,8 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { QUERY_CATEGORIES } from "../utils/queries";
 
-import CategoryList from "./UI/CategoryList";
-
 export default function CategoryMenu() {
   const { loading, data } = useQuery(QUERY_CATEGORIES);
 
@@ -14,7 +12,11 @@ export default function CategoryMenu() {
 
   return (
     <>
-      <CategoryList categoryData={categoryData} />
+      {categoryData.map((category) => (
+        <dt key={category._id} className="category p-2">
+          {category.name}
+        </dt>
+      ))}
     </>
   );
 }

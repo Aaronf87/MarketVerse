@@ -1,11 +1,11 @@
-import Hero from "../components/UI/Hero";
-import ProductList from "../components/UI/Products";
+import Hero from "../components/Hero";
+import HomeProductList from "../components/HomeProductList";
 
 export default function Home() {
   return (
     <div>
       <Hero />
-      <ProductList />
+      <HomeProductList />
     </div>
   );
 }
