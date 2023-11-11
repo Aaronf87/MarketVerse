@@ -9,10 +9,8 @@ const Header = () => {
     return (
         <header className="relative flex w-full flex-wrap items-center justify-between bg-[#FBFBFB] py-5 text-neutral-500 shadow-lg hover:text-neutral-700 focus:text-neutral-700 dark:bg-neutral-600 lg:py-4">
             <div className="flex w-full flex-wrap items-center justify-between px-3">
-                <a className="ml-2 text-xl text-neutral-800 dark:text-neutral-200" href="/">MarketVerse</a>
-
-                {/* Logo */}
-                <Logo />
+                  {/* Logo */}
+                <Logo className="ml-2 text-xl text-neutral-800 dark:text-neutral-200" href=""/>
 
                 <div className="flex items-center text ">
 
