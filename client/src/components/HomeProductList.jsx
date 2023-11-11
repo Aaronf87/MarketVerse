@@ -31,8 +31,7 @@ export default function ProductList() {
             </div>
             {Auth.loggedIn() ? (
               <div className="product-button">
-                {" "}
-                <FaCartPlus />{" "}
+                <FaCartPlus />
               </div>
             ) : (
               <> </>
