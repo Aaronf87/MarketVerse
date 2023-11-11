@@ -10,24 +10,15 @@ import { BsTrash } from "react-icons/bs";
 import { FaUserCircle } from "react-icons/fa";
 
 export default function Profile() {
-  const [selectedProduct, setSelectedProduct] = useState(null);
-
-  // <======= TOGGLE UPDATE PRODUCT USE-STATE SECTION=======>
+  // <======= TOGGLE EDIT MODE: USE-STATE SECTION=======>
   const [editMode, setEditMode] = useState(false);
 
-  // <======= FORM UPDATE PRODUCT USE-STATE SECTION=======>
-  const [updatedName, setUpdatedName] = useState("");
-  const [updatedPrice, setUpdatedPrice] = useState("");
-  const [updatedDescription, setUpdatedDescription] = useState("");
-
-  // <======= UPDATE PRODUCT USE-EFFECT SECTION=======>
-  useEffect(() => {
-    if (selectedProduct) {
-      setUpdatedName(selectedProduct.name);
-      setUpdatedPrice(selectedProduct.price);
-      setUpdatedDescription(selectedProduct.description);
-    }
-  }, [selectedProduct]);
+  // <======= UPDATE PRODUCT FORM: USE-STATE SECTION=======>
+  const [formState, setFormState] = useState({
+    updateName: "",
+    updatePrice: "",
+    updateDescription: "",
+  });
 
   // <======= QUERY SECTION=======>
   const { loading: meLoading, data: meData } = useQuery(QUERY_ME);
@@ -35,13 +26,15 @@ export default function Profile() {
     useQuery(QUERY_CATEGORIES);
 
   // <======= MUTATION SECTION=======>
-  const [updateProduct] = useMutation(UPDATE_PRODUCT);
+  const [updateProduct] = useMutation(UPDATE_PRODUCT, {
+    refetchQueries: [{ query: QUERY_ME }],
+  });
 
   const [deleteProduct] = useMutation(DELETE_PRODUCT, {
     refetchQueries: [{ query: QUERY_ME }],
   });
 
-  // <======= OBTAIN DATA SECTION =======>
+  // <======= DATA SECTION =======>
   if (meLoading || categoryLoading) {
     return <div>Loading...</div>;
   }
@@ -49,7 +42,7 @@ export default function Profile() {
   const categories = categoryData?.getCategories || [];
   const profile = meData?.me || {};
 
-  // <======= HANDLE DELETE AND UPDATE SECTION =======>
+  // <======= DELETE PRODUCT HANDLER: SECTION =======>
   const handleDelete = async (e) => {
     const id = e.target.getAttribute("item");
 
@@ -71,26 +64,41 @@ export default function Profile() {
     }
   };
 
-  const handleEdit = (productId) => {
-    setEditMode(productId);
-    setSelectedProduct(productId);
+  // <======= PRODUCT FORM HANDLE CHANGE: SECTION =======>
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
   };
 
-  const handleUpdate = async (productId) => {
-    console.log({
-      id: productId,
-      name: updatedName,
-      price: updatedPrice,
-      description: updatedDescription,
+  // <======= EDIT BUTTON CLICK HANDLER: SECTION =======>
+  const handleEdit = (productId) => {
+    setEditMode(productId);
+
+    const selectedProduct = profile.products.find(
+      (product) => product._id === productId
+    );
+
+    setFormState({
+      updateName: selectedProduct.name,
+      updatePrice: parseInt(selectedProduct.price),
+      updateDescription: selectedProduct.description,
     });
+  };
+
+  // <======= UPDATE PRODUCT HANDLER: SECTION =======>
+  const handleUpdate = async (productId) => {
+    const formattedPrice = Math.round(formState.updatePrice * 100) / 100;
 
     try {
       await updateProduct({
         variables: {
           id: productId,
-          name: updatedName,
-          price: updatedPrice,
-          description: updatedDescription,
+          name: formState.updateName,
+          price: formattedPrice,
+          description: formState.updateDescription,
         },
       });
       setEditMode(false);
@@ -120,20 +128,24 @@ export default function Profile() {
                   <label htmlFor="name">Name:</label>
                   <input
                     type="text"
-                    defaultValue={product.name}
-                    onChange={(e) => setUpdatedName(e.target.value)}
+                    name="updateName"
+                    value={formState.updateName}
+                    onChange={handleChange}
                   />
                   <label htmlFor="price">Price:</label>
                   <input
                     type="text"
-                    defaultValue={product.price}
-                    onChange={(e) => setUpdatedPrice(e.target.value)}
+                    name="updatePrice"
+                    step="any"
+                    value={formState.updatePrice}
+                    onChange={handleChange}
                   />
                   <label htmlFor="description">Description:</label>
                   <input
                     type="text"
-                    defaultValue={product.description}
-                    onChange={(e) => setUpdatedDescription(e.target.value)}
+                    name="updateDescription"
+                    value={formState.updateDescription}
+                    onChange={handleChange}
                   />
                   <button
                     className="bg-[#f6931c]"
