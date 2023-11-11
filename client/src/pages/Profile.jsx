@@ -1,23 +1,26 @@
 import { useQuery, useMutation } from "@apollo/client";
-
 import { useEffect, useState } from "react";
+import ModalForm from "../components/ModalForm";
 
 import { QUERY_ME, QUERY_CATEGORIES } from "../utils/queries";
-
-import { UPDATE_PRODUCT } from "../utils/mutations";
-import { DELETE_PRODUCT } from "../utils/mutations";
+import { UPDATE_PRODUCT, DELETE_PRODUCT } from "../utils/mutations";
 
 import { FiEdit } from "react-icons/fi";
 import { BsTrash } from "react-icons/bs";
 import { FaUserCircle } from "react-icons/fa";
-import ModalForm from "../components/ModalForm";
 
 export default function Profile() {
+  const [selectedProduct, setSelectedProduct] = useState(null);
+
+  // <======= TOGGLE UPDATE PRODUCT USE-STATE SECTION=======>
+  const [editMode, setEditMode] = useState(false);
+
+  // <======= FORM UPDATE PRODUCT USE-STATE SECTION=======>
   const [updatedName, setUpdatedName] = useState("");
   const [updatedPrice, setUpdatedPrice] = useState("");
   const [updatedDescription, setUpdatedDescription] = useState("");
-  const [selectedProduct, setSelectedProduct] = useState(null);
 
+  // <======= UPDATE PRODUCT USE-EFFECT SECTION=======>
   useEffect(() => {
     if (selectedProduct) {
       setUpdatedName(selectedProduct.name);
@@ -26,17 +29,19 @@ export default function Profile() {
     }
   }, [selectedProduct]);
 
+  // <======= QUERY SECTION=======>
   const { loading: meLoading, data: meData } = useQuery(QUERY_ME);
-  const { loading: categoryLoading, data: categoryData } = useQuery(QUERY_CATEGORIES)
+  const { loading: categoryLoading, data: categoryData } =
+    useQuery(QUERY_CATEGORIES);
 
+  // <======= MUTATION SECTION=======>
   const [updateProduct] = useMutation(UPDATE_PRODUCT);
 
   const [deleteProduct] = useMutation(DELETE_PRODUCT, {
     refetchQueries: [{ query: QUERY_ME }],
   });
 
-  const [editMode, setEditMode] = useState(false);
-
+  // <======= OBTAIN DATA SECTION =======>
   if (meLoading || categoryLoading) {
     return <div>Loading...</div>;
   }
@@ -44,9 +49,7 @@ export default function Profile() {
   const categories = categoryData?.getCategories || [];
   const profile = meData?.me || {};
 
-  console.log(categories);
-    // console.log(profile);
-
+  // <======= HANDLE DELETE AND UPDATE SECTION =======>
   const handleDelete = async (e) => {
     const id = e.target.getAttribute("item");
 
@@ -77,8 +80,8 @@ export default function Profile() {
     console.log({
       id: productId,
       name: updatedName,
-      price: updatedPrice, // Fixed variable name
-      description: updatedDescription, // Fixed variable name
+      price: updatedPrice,
+      description: updatedDescription,
     });
 
     try {
@@ -86,8 +89,8 @@ export default function Profile() {
         variables: {
           id: productId,
           name: updatedName,
-          price: updatedPrice, // Fixed variable name
-          description: updatedDescription, // Fixed variable name
+          price: updatedPrice,
+          description: updatedDescription,
         },
       });
       setEditMode(false);
@@ -99,23 +102,11 @@ export default function Profile() {
   return (
     <div className="profile-section">
       <div className="profile-container">
-
-        {/* Modal Test */}
-
-
-        <ModalForm categories={categories} />
-
-
-        {/* Modal Test */}
-
-
-
-
-
         <FaUserCircle className="profile-icon" />
         <h3>
           {profile.firstName} {profile.lastName}
         </h3>
+        <ModalForm categories={categories} />
       </div>
 
       <div className="product-container">
