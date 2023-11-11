@@ -70,10 +70,7 @@
   }
 
   .category-container h3 {
-    position: absolute;
-    margin-bottom: 0;
-    padding: 0;
-    opacity: 0;
+    display: none;
   }
 
   .category {

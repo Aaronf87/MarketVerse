@@ -7,6 +7,8 @@ export default function Hero() {
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
     height: "50vh",
+    position: "relative",
+    zIndex: "1",
   };
   const hr = {
     width: "50%",
@@ -16,7 +18,7 @@ export default function Hero() {
 
   return (
     <>
-      <section className="hero bg-gray-50 " style={style}>
+      <section className="bg-gray-50 " style={style}>
         <div className="mx-auto max-w-screen-xl px-4 py-32 lg:flex lg:h-screen lg:items-center">
           <div className="mx-auto max-w-xl text-center">
             <h1 className="text-3xl font-extrabold sm:text-5xl">
