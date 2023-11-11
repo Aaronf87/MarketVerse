@@ -1,3 +1,7 @@
+.home-container {
+  margin-top: 10px;
+}
+
 /* CONTAINER FOR CATEGORIES */
 .category-container {
   position: sticky;
@@ -61,6 +65,10 @@
 
 /* Tablets */
 @media screen and (max-width: 992px) {
+  .home-container {
+    margin-top: 0;
+  }
+
   .category-container {
     position: static;
     height: auto;

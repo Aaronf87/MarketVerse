@@ -7,9 +7,6 @@ export default function Hero() {
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
     height: "50vh",
-    position: "relative",
-    zIndex: "1",
-    marginBottom: "10px",
   };
   const hr = {
     width: "50%",
