@@ -1,51 +1,48 @@
 import { useQuery, useMutation } from "@apollo/client";
+import { useState } from "react";
+import ModalForm from "../components/ModalForm";
 
-import { useContext } from "react";
-
-import { useEffect, useState } from "react";
-
-import { QUERY_ME } from "../utils/queries";
-
-import { UPDATE_PRODUCT } from "../utils/mutations";
-import { DELETE_PRODUCT } from "../utils/mutations";
+import { QUERY_ME, QUERY_CATEGORIES } from "../utils/queries";
+import { UPDATE_PRODUCT, DELETE_PRODUCT } from "../utils/mutations";
 
 import { FiEdit } from "react-icons/fi";
 import { BsTrash } from "react-icons/bs";
 import { FaUserCircle } from "react-icons/fa";
-import "../styles/Profile.css";
 
 export default function Profile() {
-  const [updatedName, setUpdatedName] = useState("");
-  const [updatedPrice, setUpdatedPrice] = useState("");
-  const [updatedDescription, setUpdatedDescription] = useState("");
-  const [selectedProduct, setSelectedProduct] = useState(null);
+  // <======= TOGGLE EDIT MODE: USE-STATE SECTION=======>
+  const [editMode, setEditMode] = useState(false);
 
-  useEffect(() => {
-    if (selectedProduct) {
-      setUpdatedName(selectedProduct.name);
-      setUpdatedPrice(selectedProduct.price);
-      setUpdatedDescription(selectedProduct.description);
-    }
-  }, [selectedProduct]);
+  // <======= UPDATE PRODUCT FORM: USE-STATE SECTION=======>
+  const [formState, setFormState] = useState({
+    updateName: "",
+    updatePrice: "",
+    updateDescription: "",
+  });
 
-  const { loading, data } = useQuery(QUERY_ME);
+  // <======= QUERY SECTION=======>
+  const { loading: meLoading, data: meData } = useQuery(QUERY_ME);
+  const { loading: categoryLoading, data: categoryData } =
+    useQuery(QUERY_CATEGORIES);
 
-  const [updateProduct] = useMutation(UPDATE_PRODUCT);
+  // <======= MUTATION SECTION=======>
+  const [updateProduct] = useMutation(UPDATE_PRODUCT, {
+    refetchQueries: [{ query: QUERY_ME }],
+  });
 
   const [deleteProduct] = useMutation(DELETE_PRODUCT, {
     refetchQueries: [{ query: QUERY_ME }],
   });
 
-  const [editMode, setEditMode] = useState(false);
-
-  if (loading) {
+  // <======= DATA SECTION =======>
+  if (meLoading || categoryLoading) {
     return <div>Loading...</div>;
   }
 
-  const profile = data?.me || {};
+  const categories = categoryData?.getCategories || [];
+  const profile = meData?.me || {};
 
-  //   console.log(profile);
-
+  // <======= DELETE PRODUCT HANDLER: SECTION =======>
   const handleDelete = async (e) => {
     const id = e.target.getAttribute("item");
 
@@ -61,32 +58,46 @@ export default function Profile() {
       const { data } = await deleteProduct({
         variables: { id, confirm },
       });
-      console.log(data);
     } catch (err) {
       console.error(err);
     }
   };
 
-  const handleEdit = (productId) => {
-    setEditMode(productId);
-    setSelectedProduct(productId);
+  // <======= PRODUCT FORM HANDLE CHANGE: SECTION =======>
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
   };
 
-  const handleUpdate = async (productId) => {
-    console.log({
-      id: productId,
-      name: updatedName,
-      price: updatedPrice, // Fixed variable name
-      description: updatedDescription, // Fixed variable name
+  // <======= EDIT BUTTON CLICK HANDLER: SECTION =======>
+  const handleEdit = (productId) => {
+    setEditMode(productId);
+
+    const selectedProduct = profile.products.find(
+      (product) => product._id === productId
+    );
+
+    setFormState({
+      updateName: selectedProduct.name,
+      updatePrice: parseInt(selectedProduct.price),
+      updateDescription: selectedProduct.description,
     });
+  };
+
+  // <======= UPDATE PRODUCT HANDLER: SECTION =======>
+  const handleUpdate = async (productId) => {
+    const formattedPrice = Math.round(formState.updatePrice * 100) / 100;
 
     try {
       await updateProduct({
         variables: {
           id: productId,
-          name: updatedName,
-          price: updatedPrice, // Fixed variable name
-          description: updatedDescription, // Fixed variable name
+          name: formState.updateName,
+          price: formattedPrice,
+          description: formState.updateDescription,
         },
       });
       setEditMode(false);
@@ -96,15 +107,19 @@ export default function Profile() {
   };
 
   return (
-    <div className="profile-section">
-      <div className="profile-container">
-        <FaUserCircle className="profile-icon" />
-        <h3>
-          {profile.firstName} {profile.lastName}
-        </h3>
+    <div className="profile-section grid tablet:grid-cols-5 large-mobile:grid-cols-1">
+      <div className="profile-top">
+        <div className="profile-container tablet:col-span-1">
+          <FaUserCircle className="profile-icon" />
+          <h3>
+            <span>Welcome</span> <br></br> {profile.firstName}{" "}
+            {profile.lastName}
+          </h3>
+          <ModalForm categories={categories} QUERY_ME={QUERY_ME} />
+        </div>
       </div>
 
-      <div className="product-container">
+      <div className="product-container tablet:col-span-4">
         {profile.products.map((product) => (
           <div className="profile-products" key={product._id}>
             <img className="product-img" src={product.image} alt="-" />
@@ -115,20 +130,24 @@ export default function Profile() {
                   <label htmlFor="name">Name:</label>
                   <input
                     type="text"
-                    defaultValue={product.name}
-                    onChange={(e) => setUpdatedName(e.target.value)}
+                    name="updateName"
+                    value={formState.updateName}
+                    onChange={handleChange}
                   />
                   <label htmlFor="price">Price:</label>
                   <input
                     type="text"
-                    defaultValue={product.price}
-                    onChange={(e) => setUpdatedPrice(e.target.value)}
+                    name="updatePrice"
+                    step="any"
+                    value={formState.updatePrice}
+                    onChange={handleChange}
                   />
                   <label htmlFor="description">Description:</label>
                   <input
                     type="text"
-                    defaultValue={product.description}
-                    onChange={(e) => setUpdatedDescription(e.target.value)}
+                    name="updateDescription"
+                    value={formState.updateDescription}
+                    onChange={handleChange}
                   />
                   <button
                     className="bg-[#f6931c]"

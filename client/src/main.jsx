@@ -6,14 +6,18 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "tailwindcss/tailwind.css";
 
 import "./styles/index.css";
-import "./styles/card.css";
-import "./styles/modal.css";
+import "./styles/Home.css";
+import "./styles/Profile.css";
+import "./styles/Modal.css";
+import "./styles/ProductCard.css"
+import "./styles/Form.css"
+import "./styles/Footer.css"
 
 import Home from "./pages/Home.jsx";
 import Profile from "./pages/Profile.jsx";
-import NotFound from "./pages/NotFound.jsx";
 import SignUp from "./pages/SignUp.jsx";
 import Login from "./pages/Login.jsx";
+import NotFound from "./pages/NotFound.jsx";
 
 const router = createBrowserRouter([
   {

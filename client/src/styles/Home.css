@@ -1,0 +1,110 @@
+.home-container {
+  margin-top: 10px;
+}
+
+/* CONTAINER FOR CATEGORIES */
+.category-container {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  min-width: 200px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  overflow: hidden;
+
+  color: #fff;
+  background-color: rgb(77, 77, 77);
+  border-radius: 0 20px 20px 0;
+  box-shadow: 0px 1px 10px 0px rgb(37, 37, 37);
+}
+
+/* CATEGORY SECTION HEADER */
+.category-container h3 {
+  margin-bottom: 15px;
+  padding: 15px 0 5px 10px;
+  font-size: 1.5rem;
+  font-style: italic;
+  color: #36e9f0;
+  background-color: rgb(37, 37, 37);
+  box-shadow: 0px 5px 54px 0px #252525;
+}
+
+/* INDIVIDUAL CATEGORY ITEM */
+.category {
+  font-size: 1.2rem;
+  width: 100%;
+  transition: 0.25s;
+}
+
+.category:hover {
+  color: #f6931c;
+  cursor: pointer;
+  font-weight: bold;
+  transform: translateX(10px);
+}
+
+.category:active {
+  color: rgb(173, 224, 245);
+  transform: translateX(3px);
+  transition: transform 0.1s ease-in-out;
+}
+
+/* ======================= PRODUCT CARDS ======================*/
+/* ProductCard.css for Each Product Card */
+/* ============================================================ */
+
+.prod-home-format .profile-products {
+  width: 300px;
+  height: 350px;
+}
+
+/* =========================== Media Queries ========================== */
+
+/* Tablets */
+@media screen and (max-width: 992px) {
+  .home-container {
+    margin-top: 0;
+  }
+
+  .category-container {
+    position: static;
+    height: auto;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    background-color: rgb(77, 77, 77);
+    border-radius: 0 0 20px 20px;
+    z-index: 0;
+  }
+
+  .category-container h3 {
+    display: none;
+  }
+
+  .category {
+    font-size: 1rem;
+    width: auto;
+    transition: 0.25s;
+  }
+
+  .category:hover {
+    cursor: pointer;
+    transform: translateY(3px);
+  }
+
+  .category:active {
+    color: rgb(173, 224, 245);
+    transform: translateY(0px);
+    transition: transform 0.1s ease-in-out;
+  }
+
+  .prod-home-format .profile-products {
+    width: 250px;
+    height: 300px;
+  }
+}

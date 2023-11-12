@@ -8,6 +8,11 @@ export default function Hero() {
     backgroundRepeat: "no-repeat",
     height: "50vh",
   };
+  const hr = {
+    width: "50%",
+    height: "3px",
+    margin: "auto",
+  };
 
   return (
     <>
@@ -15,7 +20,9 @@ export default function Hero() {
         <div className="mx-auto max-w-screen-xl px-4 py-32 lg:flex lg:h-screen lg:items-center">
           <div className="mx-auto max-w-xl text-center">
             <h1 className="text-3xl font-extrabold sm:text-5xl">
-              Welcome to MarketVerse. <br className="xl:hidden" />
+              Welcome to <br className="xl:hidden" />
+              <h1> MarketVerse </h1>
+              <hr style={hr} />
               <strong className="font-extrabold text-red-700 sm:block">
                 Buy and Sell your way.
               </strong>
@@ -25,9 +32,7 @@ export default function Hero() {
        insert slogan here
       </p> */}
 
-            <div className="mt-8 flex flex-wrap justify-center gap-4">
-              <button className="w-[10rem]">Sign Up</button>
-            </div>
+            <div className="mt-8 flex flex-wrap justify-center gap-4"></div>
           </div>
         </div>
       </section>

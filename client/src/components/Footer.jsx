@@ -3,7 +3,7 @@ export default function Footer() {
         // <!-- Footer -->
         <footer className="bg-neutral-100 text-center text-neutral-600 dark:bg-neutral-600 dark:text-neutral-200">
             {/* <!-- Social media --> */}
-            <div className="flex items-center justify-center border-b-2 border-neutral-200 p-6 dark:border-neutral-500 lg:justify-between">
+            <div className="flex items-center justify-center border-b-2 border-neutral-200 pb-2 dark:border-neutral-500 lg:justify-between">
                 <div className="mr-12 hidden md:block">
                     <span>Get connected with us:</span>
                 </div>
@@ -22,7 +22,7 @@ export default function Footer() {
             </div>
 
             {/* <!-- Main container --> */}
-            <div className="mx-6 pt-8 pb-4 text-center">
+            <div className="mx-6 pt-4 text-center">
                 {/* <!-- Text --> */}
                 <div className="mb-6">
                     <h5 className="mb-2 font-bold uppercase">Explore Our World</h5>
@@ -34,7 +34,7 @@ export default function Footer() {
             </div>
 
             {/* <!-- Copyright --> */}
-            <div className="bg-neutral-200 p-6 text-center dark:bg-neutral-700 flex justify-center items-center">
+            <div className="bg-neutral-200 text-center dark:bg-neutral-700 flex justify-center items-center">
                 <p>
                     &copy; {new Date().getFullYear()} Marketverse. All rights reserved.
                 </p>

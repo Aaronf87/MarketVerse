@@ -1,21 +1,22 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Logo from "./Logo";
-
 import Auth from "../utils/auth.js";
 
-
 const Header = () => {
+    const location = useLocation();
+    const currentPath = location.pathname;
 
     return (
-        <header className="relative flex w-full flex-wrap items-center justify-between bg-[#FBFBFB] py-5 text-neutral-500 shadow-lg hover:text-neutral-700 focus:text-neutral-700 dark:bg-neutral-600 lg:py-4">
+        <header style={{backgroundColor: "#fff"}} className="relative flex w-full flex-wrap items-center justify-between bg-[#FBFBFB] py-5 text-neutral-500 shadow-lg hover:text-neutral-700 focus:text-neutral-700 dark:bg-neutral-600 lg:py-4">
             <div className="flex w-full flex-wrap items-center justify-between px-3">
-                <a className="ml-2 text-xl text-neutral-800 dark:text-neutral-200" href="/">MarketVerse</a>
-
-                {/* Logo */}
-                <Logo />
+                <Link to="/">
+                    {/* Logo */}
+                    <Logo className="ml-2 text-xl text-neutral-800 dark:text-neutral-200" />
+                </Link>
 
                 <div className="flex items-center text ">
 
+                    {/* If you are Logged In... Render...*/}
                     {Auth.loggedIn() ? (
                         <>
                             {/* Logout Button */}
@@ -23,9 +24,20 @@ const Header = () => {
                                 Logout
                             </button>
 
-                            {/* Profile button*/}
-                            <Link to="/profile" type="button" data-te-ripple-init data-te-ripple-color="light" className="bg-[#f6931c] hover:bg-primary-600 focus:bg-primary-600 active:bg-blue-700 mr-3 inline-block rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] ]">
-                                Profile</Link>
+                            {/* If the current path is "/" for Home... Render */}
+                            {currentPath === '/' ? (
+                                <>
+                                    {/* Profile button*/}
+                                    <Link to="/profile" type="button" data-te-ripple-init data-te-ripple-color="light" className="bg-[#f6931c] hover:bg-primary-600 focus:bg-primary-600 active:bg-blue-700 mr-3 inline-block rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] ]">
+                                        Profile</Link>
+                                </>
+                            ) : (
+                                <>
+                                    {/* Home button*/}
+                                    <Link to="/" type="button" data-te-ripple-init data-te-ripple-color="light" className="bg-[#f6931c] hover:bg-primary-600 focus:bg-primary-600 active:bg-blue-700 mr-3 inline-block rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] ]">
+                                        Home</Link>
+                                </>
+                            )}
                         </>
                     ) : (
                         <>
