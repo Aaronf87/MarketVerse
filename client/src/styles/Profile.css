@@ -55,11 +55,13 @@
 
 /* UPDATE AND DELETE BUTTONS */
 .delete-icon {
-  transition: 0.3s ease-in-out;
+  transition: 0.1s ease-out;
+  color: #fff;
 }
 
 .update-icon {
-  transition: 0.3s ease-in-out;
+  transition: 0.1s ease-out;
+  color: #fff;
 }
 
 .delete-icon:hover {
@@ -93,15 +95,11 @@
   font-weight: bold;
 }
 
-
 /* =========================== Media Queries ========================== */
 
 /* Tablets */
 @media screen and (max-width: 992px) {
-
   .profile-container {
     width: 20em;
   }
-
-
 }
