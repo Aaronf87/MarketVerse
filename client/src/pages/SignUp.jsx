@@ -55,7 +55,7 @@ export default function SignUp() {
         <div className="min-w-screen flex min-h-screen items-center justify-center bg-gray-900 px-5 py-5">
           <div className="w-full overflow-hidden rounded-3xl bg-white text-gray-500 shadow-xl">
             <div className="w-full md:flex">
-              <div className="w-full px-5 py-10 md:w-1/2 md:px-10">
+              <div className="signup-login w-full px-5 py-10 md:w-1/2 md:px-10">
                 <div className="mb-10 text-center">
                   <h1 className="text-3xl font-bold text-gray-900">SING UP</h1>
                   <p>Enter your information to Sign up</p>
@@ -165,7 +165,7 @@ export default function SignUp() {
                     <div className="mb-5 w-full px-3">
                       <button
                         type="submit"
-                        className="mx-auto block w-full max-w-xs rounded-lg bg-orange-500 px-3 py-3 font-semibold text-white hover:bg-orange-600 focus:bg-orange-600"
+                        className="form-btn mx-auto block w-full max-w-xs rounded-lg bg-orange-500 px-3 py-3 font-semibold text-white hover:bg-orange-600 focus:bg-orange-600"
                       >
                         SIGN UP NOW
                       </button>
