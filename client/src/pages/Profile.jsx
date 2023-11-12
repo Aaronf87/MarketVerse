@@ -112,9 +112,10 @@ export default function Profile() {
         <div className="profile-container tablet:col-span-1">
           <FaUserCircle className="profile-icon" />
           <h3>
-             <span>Welcome</span> <br></br> {profile.firstName} {profile.lastName}
+            <span>Welcome</span> <br></br> {profile.firstName}{" "}
+            {profile.lastName}
           </h3>
-        <ModalForm categories={categories} QUERY_ME={QUERY_ME} />
+          <ModalForm categories={categories} QUERY_ME={QUERY_ME} />
         </div>
       </div>
 

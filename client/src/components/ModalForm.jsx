@@ -81,7 +81,6 @@ export default function ModalForm({ categories, QUERY_ME }) {
         <div className="modal-form-container">
           <form onSubmit={handleFormSubmit} className="modal-form">
             <div className="form-group">
-
               <div className="modal-top">
                 <label htmlFor="category">Category</label>
                 <button
@@ -92,7 +91,7 @@ export default function ModalForm({ categories, QUERY_ME }) {
                   ×
                 </button>
               </div>
-              
+
               <select
                 id="category"
                 name="category"
