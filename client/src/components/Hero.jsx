@@ -1,4 +1,4 @@
-import hero from "/src/assets/hero1.png";
+import hero from "/src/assets/cart2.png";
 
 export default function Hero() {
   const style = {
@@ -7,6 +7,7 @@ export default function Hero() {
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
     height: "50vh",
+    color: "white",
   };
   const hr = {
     width: "50%",
@@ -19,14 +20,12 @@ export default function Hero() {
       <section className="bg-gray-50 " style={style}>
         <div className="mx-auto max-w-screen-xl px-4 py-32 lg:flex lg:h-screen lg:items-center">
           <div className="mx-auto max-w-xl text-center">
-            <h1 className="text-3xl font-extrabold sm:text-5xl">
+            <div className="font-extrabold text-3xl sm:block">
               Welcome to <br className="xl:hidden" />
               <h1> MarketVerse </h1>
               <hr style={hr} />
-              <strong className="font-extrabold text-red-700 sm:block">
-                Buy and Sell your way.
-              </strong>
-            </h1>
+              Buy and Sell your way
+            </div>
 
             {/* <p className="mt-4 sm:text-xl/relaxed">
        insert slogan here
