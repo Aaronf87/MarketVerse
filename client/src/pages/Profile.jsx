@@ -106,8 +106,6 @@ export default function Profile() {
     }
   };
 
-  console.log(profile);
-
   return (
     <div className="profile-section grid tablet:grid-cols-5 large-mobile:grid-cols-1">
       <div className="profile-top">
@@ -116,8 +114,8 @@ export default function Profile() {
           <h3>
              <span>Welcome</span> <br></br> {profile.firstName} {profile.lastName}
           </h3>
-        </div>
         <ModalForm categories={categories} QUERY_ME={QUERY_ME} />
+        </div>
       </div>
 
       <div className="product-container tablet:col-span-4">

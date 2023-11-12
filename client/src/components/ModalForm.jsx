@@ -81,8 +81,18 @@ export default function ModalForm({ categories, QUERY_ME }) {
         <div className="modal-form-container">
           <form onSubmit={handleFormSubmit} className="modal-form">
             <div className="form-group">
-              <label htmlFor="category">Category</label>
 
+              <div className="modal-top">
+                <label htmlFor="category">Category</label>
+                <button
+                  type="button"
+                  className="modal-close-button"
+                  onClick={handleToggleModal}
+                >
+                  ×
+                </button>
+              </div>
+              
               <select
                 id="category"
                 name="category"
@@ -165,13 +175,6 @@ export default function ModalForm({ categories, QUERY_ME }) {
             </div>
 
             <div className="form-actions">
-              <button
-                type="button"
-                className="modal-close-button"
-                onClick={handleToggleModal}
-              >
-                ×
-              </button>
               <button type="submit" className="submit-button">
                 Submit Product
               </button>
