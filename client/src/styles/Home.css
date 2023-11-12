@@ -61,6 +61,22 @@
   height: 350px;
 }
 
+.cart-btn {
+  transition: 0.1s ease-out;
+  color: #fff;
+  cursor: pointer;
+}
+
+.cart-btn:hover {
+  color: #dd861c;
+  cursor: pointer;
+  font-size: 1.2em;
+}
+
+.cart-btn:active {
+  color: #606c88;
+}
+
 /* =========================== Media Queries ========================== */
 
 /* Tablets */
