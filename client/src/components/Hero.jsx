@@ -1,4 +1,4 @@
-import hero from "/src/assets/hero1.png";
+import hero from "/src/assets/cart2.png";
 
 export default function Hero() {
   const style = {
@@ -7,6 +7,7 @@ export default function Hero() {
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
     height: "50vh",
+    color: "gray-50",
   };
   const hr = {
     width: "50%",
