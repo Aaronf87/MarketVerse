@@ -40,8 +40,8 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-weight: bold; /* Optional: makes the text bold */
-  text-transform: uppercase; /* Optional: makes the text uppercase */
+  font-weight: bold; 
+  text-transform: uppercase; 
 }
 
 .submit-button {
@@ -59,7 +59,7 @@
 
 .modal-close-button:hover,
 .modal-close-button:focus {
-  background-color: #e60000; /* A darker red for hover/focus states */
+  background-color: #e60000; 
 }
 
 

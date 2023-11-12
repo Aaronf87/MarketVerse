@@ -75,7 +75,7 @@ export default function ModalForm({ categories, QUERY_ME }) {
 
   return (
     <>
-      <button onClick={handleToggleModal}>Create Product</button>
+      <button onClick={handleToggleModal}>Post Product</button>
 
       <Modal isModalOpen={isModalOpen} handleToggleModal={handleToggleModal}>
         <div className="modal-form-container">

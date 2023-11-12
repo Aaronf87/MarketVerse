@@ -58,7 +58,6 @@ export default function Profile() {
       const { data } = await deleteProduct({
         variables: { id, confirm },
       });
-      
     } catch (err) {
       console.error(err);
     }
@@ -107,17 +106,21 @@ export default function Profile() {
     }
   };
 
+  console.log(profile);
+
   return (
-    <div className="profile-section">
-      <div className="profile-container">
-        <FaUserCircle className="profile-icon" />
-        <h3>
-          {profile.firstName} {profile.lastName}
-        </h3>
-        <ModalForm categories={categories} QUERY_ME={QUERY_ME}/>
+    <div className="profile-section grid tablet:grid-cols-6 large-mobile:grid-cols-1">
+      <div className="profile-top">
+        <div className="profile-container tablet:w-auto">
+          <FaUserCircle className="profile-icon" />
+          <h3>
+             <span>Welcome</span> <br></br> {profile.firstName} {profile.lastName}
+          </h3>
+        </div>
+        <ModalForm categories={categories} QUERY_ME={QUERY_ME} />
       </div>
 
-      <div className="product-container">
+      <div className="product-container tablet:col-span-5">
         {profile.products.map((product) => (
           <div className="profile-products" key={product._id}>
             <img className="product-img" src={product.image} alt="-" />

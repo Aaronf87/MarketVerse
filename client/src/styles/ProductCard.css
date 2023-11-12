@@ -14,7 +14,7 @@
   border-radius: 10px;
   border: solid 0.5px #bfbfbf;
   box-shadow: 0px 1px 8px -3px rgb(37, 37, 37);
-
+  transition: all 0.15s ease-in;
   overflow: hidden;
 }
 
@@ -67,15 +67,39 @@
   font-size: 2.1em;
   color: #1c73f6;
   filter: drop-shadow(5px 5px 10px rgba(39, 39, 39, 0.938));
-
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease-in-out;
-
   z-index: 2;
+}
+
+.profile-products:hover {
+  transform: scale(1.02);
+  box-shadow: 0px 1px 8px -3px rgb(231, 13, 13);
+  animation: borderLoop 4s linear infinite;
+  border: solid 2px;
 }
 
 .profile-products:hover .product-button {
   opacity: 1;
   pointer-events: all;
+}
+
+/* ANIMATION FOR CARD HOVER */
+@keyframes borderLoop {
+  0% {
+    border-color: #f6931c;
+  }
+  25% {
+    border-color: #bfbfbf;
+  }
+  50% {
+    border-color: #fff;
+  }
+  75% {
+    border-color: #bfbfbf;
+  }
+  100% {
+    border-color: #f6931c;
+  }
 }

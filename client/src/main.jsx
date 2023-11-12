@@ -10,6 +10,7 @@ import "./styles/Home.css";
 import "./styles/Profile.css";
 import "./styles/Modal.css";
 import "./styles/ProductCard.css"
+import "./styles/Footer.css"
 
 import Home from "./pages/Home.jsx";
 import Profile from "./pages/Profile.jsx";
