@@ -7,7 +7,7 @@ export default function Hero() {
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
     height: "50vh",
-    color: "gray-50",
+    color: "white",
   };
   const hr = {
     width: "50%",
