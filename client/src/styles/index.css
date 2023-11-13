@@ -23,6 +23,10 @@
   background-color: #242424;
 }
 
+.main-container {
+  width: 100vw
+}
+
 /* Use Class for Glass Effect */
 .frost {
 /* From https://css.glass */

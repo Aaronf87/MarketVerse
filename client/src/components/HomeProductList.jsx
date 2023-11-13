@@ -1,12 +1,20 @@
 import { useQuery } from "@apollo/client";
-import { QUERY_ALL_PRODUCTS } from "../utils/queries";
+import { useEffect, useState } from "react";
+import { QUERY_ALL_PRODUCTS, QUERY_PRODUCTS } from "../utils/queries";
 import Auth from "../utils/auth";
 
 import CategoryMenu from "./CategoryMenu";
 import { FaCartPlus } from "react-icons/fa";
 
 export default function ProductList() {
-  const { loading, data } = useQuery(QUERY_ALL_PRODUCTS);
+  const [category, setCategory] = useState(null);
+
+  const query = category ? QUERY_PRODUCTS : QUERY_ALL_PRODUCTS;
+
+  const { loading, data } = useQuery(query, {
+    variables: { category: category },
+  });
+
   const productData = data?.getProducts || [];
 
   if (loading) {
@@ -17,7 +25,7 @@ export default function ProductList() {
     <div className="home-container grid gap-4 tablet:grid-cols-6 large-mobile:grid-cols-1">
       <div className="category-container tablet:w-auto">
         <h3>Product Categories</h3>
-        <CategoryMenu />
+        <CategoryMenu setCategory={setCategory} category={category} />
       </div>
 
       <div className="product-container prod-home-format tablet:col-span-5">
