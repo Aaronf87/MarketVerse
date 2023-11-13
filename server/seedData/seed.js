@@ -101,7 +101,7 @@ const seedDatabase = async () => {
       const price = getRandomPrice(); // Between 0 and 500
       const quantity = Math.floor(Math.random() * 10); // Between 0 and 10
       const category = selectedCategory._id;
-      const image = `https://source.unsplash.com/1600x900/?${name}`;
+      // const image = `https://source.unsplash.com/1600x900/?${name}`;
 
       const item = {
         userId,
@@ -110,7 +110,7 @@ const seedDatabase = async () => {
         price,
         quantity,
         category,
-        image,
+        // image,
       }
 
       products.push(item);

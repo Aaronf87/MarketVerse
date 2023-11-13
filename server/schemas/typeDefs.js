@@ -13,6 +13,11 @@ type User {
     password: String!
 }
 
+type Image {
+    cloudinaryId: String
+    url: String
+}
+
 type Product {
     _id: ID
     userId: User!
@@ -21,7 +26,7 @@ type Product {
     price: Float!
     quantity: Int
     category: Category! 
-    image: String
+    image: Image
 }
 
 type OrderProduct {

@@ -160,7 +160,20 @@ export default function ModalForm({ categories, QUERY_ME }) {
                 required
               />
             </div>
+            
+            <div className="form-group">
+              <label htmlFor="quantity">Image</label>
+              <input
+                placeholder="Image URL"
+                id="image"
+                type="file"
+                name="image"
+                value={formState.image}
+                onChange={(e) => handleImageUpload(e)}
+              />
+            </div>
 
+            {/*
             <div className="form-group">
               <label htmlFor="quantity">Image</label>
               <input
@@ -171,7 +184,8 @@ export default function ModalForm({ categories, QUERY_ME }) {
                 value={formState.image}
                 onChange={handleChange}
               />
-            </div>
+                </div> 
+                */}
 
             <div className="form-actions">
               <button type="submit" className="submit-button">

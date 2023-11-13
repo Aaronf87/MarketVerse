@@ -24,7 +24,7 @@
 /* CATEGORY SECTION HEADER */
 .category-container h3 {
   margin-bottom: 15px;
-  padding: 15px 0 15px 30px;
+  padding: 15px 15px 15px 20px;
   width: 100%;
   font-size: 1.5rem;
   font-style: italic;
@@ -36,7 +36,7 @@
 /* INDIVIDUAL CATEGORY ITEM */
 .category {
   font-size: 1.2rem;
-  width: 90%;
+  width: 100%;
   transition: 0.25s;
   padding: 1.5rem;
 }
