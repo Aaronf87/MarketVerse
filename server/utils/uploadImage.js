@@ -74,7 +74,7 @@ const getAssetInfo = async (publicId) => {
 (async () => {
 
     // Set the image to upload
-    const imagePath = 'C:/Users/chris/OneDrive/Pictures/Screenshots/123.png';
+    const imagePath = '';
 
     // Upload the image
     const publicId = await uploadImage(imagePath);
