@@ -97,9 +97,9 @@ export default function Login() {
                   <div className="-mx-3 flex">
                     <div className="mb-5 w-full px-3">
                       <button
-                        type="submit"
+                        type="button"
                         onSubmit={handleFormSubmit}
-                        className="form-btn mx-auto block w-full max-w-xs rounded-lg bg-orange-500 px-3 py-3 font-semibold text-white hover:bg-orange-600 focus:bg-orange-600"
+                        className="form-btn mx-auto block w-full max-w-xs bg-[#f6931c] hover:bg-primary-600 focus:bg-orange-600 active:bg-blue-700 mr-3 inline-block rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] ]"
                       >
                         LOGIN
                       </button>
