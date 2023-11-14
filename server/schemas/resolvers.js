@@ -4,7 +4,7 @@ const { uploadImage, cloudConfig } = require("../utils/imageUploader");
 
 // Import dotenv and cloudinary for image uploads
 require("dotenv").config();
-// const fs = require("fs");
+const fs = require("fs");
 const cloudinary = require("cloudinary").v2;
 
 // TODO: const stripe = require("stripe")(`${process.env.STRIPE_SECRET}`);
@@ -162,13 +162,11 @@ const resolvers = {
     addProduct: async (parent, args, context) => {
       if (context.user) {
         try {
-          let imagePath = args.image;
-
           await cloudinary.config(cloudConfig);
 
-          const result = await uploadImage(imagePath);
+          const result = await uploadImage(args.image);
 
-          imageParams = {
+          const imageParams = {
             cloudinaryId: result.asset_id,
             url: result.secure_url,
           };

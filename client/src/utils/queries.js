@@ -18,7 +18,10 @@ query me {
         _id
         name
       }
-      image
+      image {
+        cloudinaryId
+        url
+      }
     }
     orders {
       _id
@@ -43,7 +46,10 @@ query getProducts($category: ID) {
     description
     price
     quantity
-    image
+    image {
+      cloudinaryId
+      url
+    }
     category {
       name
     }
@@ -64,7 +70,10 @@ query getProducts {
     description
     price
     quantity
-    image
+    image {
+      cloudinaryId
+      url
+    }
     category {
       name
     }

@@ -8,9 +8,6 @@ type User {
     email: String!
     products: [Product]
     orders: [Order]
-    
-    # TODO: Remove password field before deploying
-    password: String!
 }
 
 type Image {

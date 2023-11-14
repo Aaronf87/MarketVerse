@@ -17,8 +17,9 @@ export default function ModalForm({ categories, QUERY_ME }) {
     description: "",
     price: "",
     quantity: "",
-    image: "",
   });
+
+  const [fileState, setFileState] = useState("");
 
   // <======= MUTATION SECTION: ADD PRODUCT =======>
   const [addProduct] = useMutation(ADD_PRODUCT, {
@@ -40,21 +41,21 @@ export default function ModalForm({ categories, QUERY_ME }) {
   };
 
   // <======= HANDLER: FORM SUBMIT (TO CREATE PRODUCT) =======>
-  const handleFormSubmit = (event) => {
+  const handleFormSubmit = async (event) => {
     event.preventDefault();
 
     const formattedPrice = Math.round(formState.price * 100) / 100;
     const formattedQuantity = parseInt(formState.quantity);
 
     try {
-      const { data } = addProduct({
+      const { data } = await addProduct({
         variables: {
           category: formState.category,
           name: formState.name,
           description: formState.description,
           price: formattedPrice,
           quantity: formattedQuantity,
-          image: formState.image,
+          image: fileState,
         },
       });
     } catch (err) {
@@ -67,10 +68,56 @@ export default function ModalForm({ categories, QUERY_ME }) {
       description: "",
       price: "",
       quantity: "",
-      image: "",
     });
 
+    setFileState("");
+
     setModalOpen(false);
+  };
+
+  //  CONVERT IMAGE TO BASE64
+  const readFileAsDataURL = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        resolve(event.target.result);
+      };
+      reader.onerror = (error) => {
+        reject(error);
+      };
+      reader.readAsDataURL(file);
+    });
+  };
+
+  // RENDER IMAGE ON THE CANVAS
+  const renderImageOnCanvas = (imageData) => {
+    const canvas = document.getElementById("myCanvas");
+    const context = canvas.getContext("2d");
+
+    const img = new Image();
+    img.src = imageData;
+    img.onload = () => {
+      context.drawImage(img, 0, 0, canvas.width, canvas.height);
+    };
+  };
+
+  // HANLDER: IMAGE UPLOAD TO CLOUDINARY
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0];
+
+    if (file) {
+      try {
+        const imageData = await readFileAsDataURL(file);
+
+        renderImageOnCanvas(imageData);
+
+        if (imageData) {
+          setFileState(imageData);
+        }
+      } catch (err) {
+        console.error("Error Processing Image:", err);
+      }
+    }
   };
 
   return (
@@ -160,7 +207,7 @@ export default function ModalForm({ categories, QUERY_ME }) {
                 required
               />
             </div>
-            
+
             <div className="form-group">
               <label htmlFor="quantity">Image</label>
               <input
@@ -168,24 +215,11 @@ export default function ModalForm({ categories, QUERY_ME }) {
                 id="image"
                 type="file"
                 name="image"
-                value={formState.image}
                 onChange={(e) => handleImageUpload(e)}
+                required
               />
+              <canvas id="myCanvas" width="50" height="50"></canvas>
             </div>
-
-            {/*
-            <div className="form-group">
-              <label htmlFor="quantity">Image</label>
-              <input
-                placeholder="Image URL"
-                id="image"
-                type="text"
-                name="image"
-                value={formState.image}
-                onChange={handleChange}
-              />
-                </div> 
-                */}
 
             <div className="form-actions">
               <button type="submit" className="submit-button">
