@@ -1,6 +1,11 @@
 const { User, Product, Order, Category } = require("../models");
 const { signToken, AuthenticationError } = require("../utils/auth");
+const { uploadImage, cloudConfig } = require("../utils/imageUploader");
+
+// Import dotenv and cloudinary for image uploads
 require("dotenv").config();
+const fs = require("fs");
+const cloudinary = require("cloudinary").v2;
 
 // TODO: const stripe = require("stripe")(`${process.env.STRIPE_SECRET}`);
 
@@ -157,9 +162,23 @@ const resolvers = {
     addProduct: async (parent, args, context) => {
       if (context.user) {
         try {
+          await cloudinary.config(cloudConfig);
+
+          const result = await uploadImage(args.image);
+
+          const imageParams = {
+            cloudinaryId: result.asset_id,
+            url: result.secure_url,
+          };
+
           const product = await Product.create({
-            ...args,
             userId: context.user._id,
+            name: args.name,
+            description: args.description,
+            price: args.price,
+            quantity: args.quantity,
+            category: args.category,
+            image: imageParams,
           });
 
           await User.findByIdAndUpdate(
@@ -256,10 +275,9 @@ const resolvers = {
             products: input,
           });
 
-          const newOrderData = await Order.findById(newOrder._id)
-          .populate({
+          const newOrderData = await Order.findById(newOrder._id).populate({
             path: "products.product",
-            model: "Product" ,
+            model: "Product",
           });
 
           return newOrderData;

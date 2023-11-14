@@ -31,11 +31,10 @@ const productSchema = new Schema({
     ref: "Category",
     required: true,
   },
-
-  // ! Revisit
   image: {
-    type: String,
-  },
+    cloudinaryId: String,
+    url: String,
+  }
 });
 
 const Product = mongoose.model("Product", productSchema);

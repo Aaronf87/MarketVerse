@@ -8,9 +8,11 @@ type User {
     email: String!
     products: [Product]
     orders: [Order]
-    
-    # TODO: Remove password field before deploying
-    password: String!
+}
+
+type Image {
+    cloudinaryId: String
+    url: String
 }
 
 type Product {
@@ -21,7 +23,7 @@ type Product {
     price: Float!
     quantity: Int
     category: Category! 
-    image: String
+    image: Image
 }
 
 type OrderProduct {

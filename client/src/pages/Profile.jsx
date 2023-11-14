@@ -122,7 +122,7 @@ export default function Profile() {
       <div className="product-container tablet:col-span-4">
         {profile.products.map((product) => (
           <div className="profile-products" key={product._id}>
-            <img className="product-img" src={product.image} alt="-" />
+            <img className="product-img" src={product.image.url} alt="-" />
 
             {editMode === product._id ? (
               <>
