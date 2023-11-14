@@ -42,60 +42,50 @@ MarketVerse is a ....
 
 ## Usage
 
-Here are some steps to begin using this application:
+To start using MarketVerse:
 
-1.  Navigate to the [UnityBiz Landing Page](https://unitybiz-fd2efb602da8.herokuapp.com/)
-2.  If you do not have an account for your company, Create an account under "Company Sign Up".
-3.  Once you have created an account you will be given a long unique code created exclusively for your company. This will be used for when your employees will make an account.
-4.  To add an employee direct them to the "Employee Sign Up. They will need to fill out the form and include the company's unique id.
-5.  Next, Employees are directed to the homepage. There they can post any updates or newsletters for the company.
-6.  On the nav bar on the side they are able to create new Purchase Orders.
-7.  There is another directory to View Purchase Orders. In that directory they are able to print PDF files of any purchase order created for your company.
-8.  There is a logout button on bottom of the nav bar.
+1. Visit [MarketVerse](https://marketverse-link.com/).
+2. Sign up or log in to access the full range of features.
+3. Explore the various product categories.
+4. Add items to your cart and proceed to checkout for purchases.
 
 ## Technologies Used
 
-> This application incorpartes the following technologies...
+MarketVerse integrates various technologies:
 
 **Front-End Development:**
 
 - Style: CSS and Tailwind
 - Script: JavaScript
-- Template Engine: Handlebars, express-handlebars
+- Framework: React.js
 
 **Back-End Development:**
 
-- Environment: Node.js with NPM.
-- Frameworks: Express.js
-- Database: MySQL
-- Object Relational Mapping: Sequelize
-- Libraries: express-session, bcrypt(salt and hash passwords), dotenv, jspdf(creates pdf), jspdf-autotable(creates tables for pdf in jspdf),
-- Route Testing: Insomnia.
-- URL Deployment: Heroku.
+- Environment: Node.js
+- Server: Express.js
+- Database: MongoDB
+- API: GraphQL with Apollo Server
+- Authentication: JWT
 
 ## Contribution
 
-> To contribute to this repository you may contact us for further details.
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions to **MarketVerse** are greatly appreciated.
 
-‎<p style="text-align: center;">
-**UnityBiz Created By:
-[Denisse Holgersen](https://unitybiz-fd2efb602da8.herokuapp.com/),
-[Christian Palacios](https://github.com/Holgersend?tab=repositories),
-[Matt Montano](https://github.com/keybit-1?tab=repositories),
-[Aaron Flores](https://github.com/Aaronf87?tab=repositories)**
-
- </p>
+To contribute:
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a pull request
 
 ## Credits
 
-Download jsPDF Library: https://www.npmjs.com/package/jspdf
-
-Download jsPDF-autotable Library: https://www.npmjs.com/package/jspdf-autotable
+This project was inspired by the need for a unified platform to streamline online shopping and selling.
 
 ## License
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)  
- **The MIT License:** Please refer to the LICENSE in the repository.
+**The MIT License:** Please refer to the LICENSE in the repository.
 
 ## Screenshots
 >Landing Page
