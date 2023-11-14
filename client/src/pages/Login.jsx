@@ -40,19 +40,22 @@ export default function Login() {
 
   return (
     <>
-      <div>
-        <div className="min-w-screen flex min-h-screen items-center justify-center bg-gray-900 px-5 py-5">
+         <div>
+        <div className="min-w-screen flex min-h-screen items-center justify-center  px-5 py-5">
           <div className="w-full overflow-hidden rounded-3xl bg-white text-gray-500 shadow-xl">
             <div className="w-full md:flex">
-              <div className="signup-login w-full px-5 py-10 md:w-1/2 md:px-10">
+              <div className=" w-full px-5 py-10 md:w-1/2 md:px-10">
                 <div className="mb-10 text-center">
-                  <h1 className="text-3xl font-bold text-gray-900">
-                    WELCOME BACK
-                  </h1>
-                  <p>Add your username and password to login</p>
+                  <h1 className="text-1xl font-bold text-[orange]">LOGIN</h1>
+                  <p>Enter your information to Login to your account</p>
                 </div>
 
+                {/*first name field form */}
                 <form onSubmit={handleFormSubmit}>
+                  <div className="-mx-3 flex">
+                  </div>
+
+
                   {/*username field form */}
                   <div className="-mx-3 flex">
                     <div className="mb-5 w-full px-3">
@@ -62,7 +65,7 @@ export default function Login() {
                       <div className="flex">
                         <div className="pointer-events-none z-10 flex w-10 items-center justify-center pl-1 text-center"></div>
                         <input
-                          className="-ml-10 w-full rounded-lg border-2 border-gray-200 py-2 pl-10 pr-3 outline-none focus:border-orange-500"
+                          className="-ml-10 w-full rounded-lg border-2 border-gray-200 py-2 pl-10 pr-3 outline-none focus:border-[orange]"
                           placeholder="john1996"
                           type="text"
                           name="username"
@@ -82,7 +85,7 @@ export default function Login() {
                       <div className="flex">
                         <div className="pointer-events-none z-10 flex w-10 items-center justify-center pl-1 text-center"></div>
                         <input
-                          className="-ml-10 w-full rounded-lg border-2 border-gray-200 py-2 pl-10 pr-3 outline-none focus:border-orange-500"
+                          className="-ml-10 w-full rounded-lg border-2 border-bg-[#f6931c] py-2 pl-10 pr-3 outline-none focus:border-[orange]"
                           placeholder="************"
                           type="password"
                           name="password"
@@ -98,8 +101,7 @@ export default function Login() {
                     <div className="mb-5 w-full px-3">
                       <button
                         type="submit"
-                        onSubmit={handleFormSubmit}
-                        className="form-btn mx-auto block w-full max-w-xs rounded-lg bg-orange-500 px-3 py-3 font-semibold text-white hover:bg-orange-600 focus:bg-orange-600"
+                        className="form-btn mx-auto block w-full max-w-xs rounded-lg bg-[#f6931c] px-3 py-3 font-semibold text-[white] hover:bg-[orange] focus:bg-[orange]"
                       >
                         LOGIN
                       </button>

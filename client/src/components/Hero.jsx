@@ -1,4 +1,4 @@
-import hero from "/src/assets/cart2.png";
+import hero from "/src/assets/blue.png";
 
 export default function Hero() {
   const style = {
@@ -8,9 +8,10 @@ export default function Hero() {
     backgroundRepeat: "no-repeat",
     height: "50vh",
     color: "white",
+    padding: "25px 90px 90px 1100px",
   };
   const hr = {
-    width: "50%",
+    width: "90%",
     height: "3px",
     margin: "auto",
   };
@@ -24,12 +25,13 @@ export default function Hero() {
               Welcome to <br className="xl:hidden" />
               <h1> MarketVerse </h1>
               <hr style={hr} />
-              Buy and Sell your way
+              
             </div>
 
-            {/* <p className="mt-4 sm:text-xl/relaxed">
-       insert slogan here
-      </p> */}
+            <p className="mt-3 sm:text-xl/relaxed">
+            Your Online Store where <br></br> you      
+              Buy and Sell your way
+      </p> 
 
             <div className="mt-8 flex flex-wrap justify-center gap-4"></div>
           </div>
