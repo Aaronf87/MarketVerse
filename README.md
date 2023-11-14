@@ -98,26 +98,15 @@ This project was inspired by the need for a unified platform to streamline onlin
 >Landing Page
 ![Landing Page](./public/assets/screenshots/landingpage.png)  
 
->Create Purchase Order
-![Create Purchase Order](./public/assets/screenshots/createPO.png)  
+>User Profile
+![Created user profile]()  
 
->View All Purchase Orders
-![View All Purchase Orders](./public/assets/screenshots/viewPO's.png)  
+>Post a product modal
+![Post a product image]()  
 
->Generate PDF by pressing the PDF button
-![Generate PDF by pressing the PDF button](./public/assets/screenshots/generatePDF.png)  
-
->View Company Newsletters
-![View Company Newsletters](./public/assets/screenshots/newsletter.png)  
-
->Company and Employee Login
-![Company and Employee Login](./public/assets/screenshots/company-employee-login.png)  
-
->Company and Employee Sign Up 
-![Company and Employee Sign Up](./public/assets/screenshots/company-employee-signup.png)  
+>View products by categories
+![View of one category]()  
 
 >404 Page
-![404 Page](./public/assets/screenshots/404.png)  
+![404 Page]()  
 
->Redirect Page
-![Redirect Page](./public/assets/screenshots/redirect.png)  
