@@ -54,8 +54,8 @@ export default function Footer() {
                 <div className="mb-6">
                     <h5 className="mb-2 font-bold uppercase">Subscribe to Our Newsletter</h5>
                     <form>
-                        <input type="email" placeholder="Enter your email" />
-                        <button type="submit">Subscribe</button>
+                        <input   className = "p-2 border rounded " type="email" placeholder="Enter your email" />
+                        <button className="bg-[#f6931c] m-3 border" type="submit">Subscribe</button>
                     </form>
                 </div>
             </div>
