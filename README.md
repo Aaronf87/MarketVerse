@@ -9,14 +9,9 @@
 
 </p>
 
-
-
-
-
-
 ## Description
 
-**DEPLOYED LINK HERE**
+--**DEPLOYED LINK HERE**--
 
 Welcome to MarketVerse
 
@@ -26,16 +21,15 @@ MarketVerse is a application created for people by people who want to make the b
 
 **Front-End Features:**
 
-1. Create a company account.
-2. Create an employee account and link it to the company via a unique code associated with the company.
-3. Allow employees to create newsletters for the company homepage to communicate with all departments of important events.
-4. Allows employees to create Purchase Orders for departments.
-5. Allows employees to print a formal PDF file for the selected (created) purchase order.  
-   These are available at any time in the view purchase order tab.
+1. Create a user account.
+2. View posted products you can add to your cart.
+3. Post a product with a Category, Product Name, Description, Price, Quantity, Image option.
+ 
+  
 
 **Back-End Features:** _(Front-End For These Features in Construction...)_
 
-1. Create messages between two employees. (Insomnia Tested)
+1. Create an image upload to post image for products
 
 **Future Updates:** Future updates will expand and add more features to make this a smooth application for all companies and employers to use.
 
@@ -87,7 +81,7 @@ To contribute:
 
 ## Credits
 
-This project was inspired by the need for a unified platform to streamline online shopping and selling.
+This project was inspired by the need to create an enjoyable online shopping experience for customers
 
 ## License
 
