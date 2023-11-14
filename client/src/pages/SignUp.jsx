@@ -57,7 +57,7 @@ export default function SignUp() {
             <div className="w-full md:flex">
               <div className="signup-login w-full px-5 py-10 md:w-1/2 md:px-10">
                 <div className="mb-10 text-center">
-                  <h1 className="text-1xl font-bold text-[orange]">SING UP</h1>
+                  <h1 className="text-1xl font-bold text-[orange]">SIGN UP</h1>
                   <p>Enter your information to Sign up</p>
                 </div>
 
