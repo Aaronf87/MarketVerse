@@ -11,11 +11,11 @@
 
 **DEPLOYED LINK HERE**
 
-Welcome to MarketVers
+Welcome to MarketVerse
 
-MarketVerse is a ....
+MarketVerse is a application created for people by people who want to make the  buying and selling process simple.
 
-**_Version 1.0_** of this application currently only supports the following features:
+<!-- **_Version 1.0_** of this application currently only supports the following features: -->
 
 **Front-End Features:**
 
