@@ -8,7 +8,7 @@ export default function Hero() {
     backgroundRepeat: "no-repeat",
     height: "50vh",
     color: "white",
-    padding: "25px 90px 90px 1100px",
+    // padding: "25px 90px 90px 1100px",
   };
   const hr = {
     width: "90%",
