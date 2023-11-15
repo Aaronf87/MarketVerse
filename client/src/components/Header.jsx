@@ -7,8 +7,8 @@ const Header = () => {
     const currentPath = location.pathname;
 
     return (
-        <header style={{backgroundColor: "#fff"}} className="relative flex w-full  mobile:items-center justify-between bg-[#FBFBFB] py-5 text-neutral-500 shadow-lg hover:text-neutral-700 focus:text-neutral-700 dark:bg-neutral-600 lg:py-4">
-            <div className="flex w-full flex-wrap items-center justify-between  px-3 md:flex">
+        <header style={{backgroundColor: "#fff"}} className="relative w-full  mobile:items-center bg-[#FBFBFB] py-5 text-neutral-500 shadow-lg hover:text-neutral-700 focus:text-neutral-700 dark:bg-neutral-600 lg:py-4">
+            <div className="flex w-full large-mobile:justify-between flex-col large-mobile:flex-row  items-center px-3">
                 <Link to="/">
                     {/* Logo */}
                     <Logo className="ml-2" />

@@ -1,8 +1,3 @@
-/* .home-container {
-  margin-top: 90px;
-  position: relative;
-} */
-
 /* CONTAINER FOR CATEGORIES */
 .category-container {
   position: sticky;
@@ -90,7 +85,7 @@
     color: #fff;
     background-color: #f6931c;
     height: 90px;
-    font-size: .8rem;
+    font-size: 0.8rem;
     padding: 0 10px;
 
     z-index: 3;
@@ -146,6 +141,6 @@
   }
 
   .prod-home-format .profile-products .product-info .description {
-    min-height: 0px;
+    display: none;
   }
 }
