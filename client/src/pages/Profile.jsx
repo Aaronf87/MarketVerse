@@ -2,7 +2,11 @@ import { useQuery, useMutation } from "@apollo/client";
 import { useState } from "react";
 import ModalForm from "../components/ModalForm";
 
-import { QUERY_ME, QUERY_CATEGORIES } from "../utils/queries";
+import {
+  QUERY_ME,
+  QUERY_CATEGORIES,
+  QUERY_ALL_PRODUCTS,
+} from "../utils/queries";
 import { UPDATE_PRODUCT, DELETE_PRODUCT } from "../utils/mutations";
 
 import { FiEdit } from "react-icons/fi";
@@ -27,11 +31,11 @@ export default function Profile() {
 
   // <======= MUTATION SECTION=======>
   const [updateProduct] = useMutation(UPDATE_PRODUCT, {
-    refetchQueries: [{ query: QUERY_ME }],
+    refetchQueries: [{ query: QUERY_ME }, { query: QUERY_ALL_PRODUCTS }],
   });
 
   const [deleteProduct] = useMutation(DELETE_PRODUCT, {
-    refetchQueries: [{ query: QUERY_ME }],
+    refetchQueries: [{ query: QUERY_ME }, { query: QUERY_ALL_PRODUCTS }],
   });
 
   // <======= DATA SECTION =======>
@@ -115,7 +119,11 @@ export default function Profile() {
             <span>Welcome</span> <br></br> {profile.firstName}{" "}
             {profile.lastName}
           </h3>
-          <ModalForm categories={categories} QUERY_ME={QUERY_ME} />
+          <ModalForm
+            categories={categories}
+            QUERY_ME={QUERY_ME}
+            QUERY_ALL_PRODUCTS={QUERY_ALL_PRODUCTS}
+          />
         </div>
       </div>
 
