@@ -12,6 +12,7 @@ export default function CategoryMenu({ category, setCategory }) {
 
   return (
     <>
+    
       <dt
       className="category p-2"
       onClick={() => setCategory(null)}>

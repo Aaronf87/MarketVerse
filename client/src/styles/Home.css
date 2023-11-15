@@ -1,28 +1,29 @@
 .home-container {
-  margin-top: 10px;
+  margin-top: 90px;
+  position:relative; 
 }
 
 /* CONTAINER FOR CATEGORIES */
 .category-container {
   position: sticky;
   top: 0;
-  height: 100vh;
-  min-width: 200px;
+  height: 50px;
+  max-width: 100%;
+  z-index: 3;
 
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: space-between;
+  align-items:center;
 
   overflow: hidden;
-
   color: #fff;
-  background-color: rgb(77, 77, 77);
-  border-radius: 0 20px 20px 0;
+  background-color: #f6931c;
   box-shadow: 0px 1px 10px 0px rgb(37, 37, 37);
+  padding: 0 200px ;
 }
 
 /* CATEGORY SECTION HEADER */
-.category-container h3 {
+/* .category-container h3 {
   margin-bottom: 15px;
   padding: 15px 15px 15px 20px;
   width: 100%;
@@ -31,25 +32,25 @@
   color: #36e9f0;
   background-color: rgb(37, 37, 37);
   box-shadow: 0px 5px 54px 0px #252525;
-}
+} */
 
 /* INDIVIDUAL CATEGORY ITEM */
 .category {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   width: 100%;
   transition: 0.25s;
-  padding: 1.5rem;
+  text-align: center;
 }
 
 .category:hover {
-  color: #f6931c;
+  color: #06b8bf;
   cursor: pointer;
   font-weight: bold;
   transform: translateX(10px);
 }
 
 .category:active {
-  color: rgb(173, 224, 245);
+  color: #06b8bf;
   transform: translateX(3px);
   transition: transform 0.1s ease-in-out;
 }
@@ -59,8 +60,13 @@
 /* ============================================================ */
 
 .prod-home-format .profile-products {
+  position: relative; /* Ensure a stacking context for z-index to work */
+}
+
+.prod-home-format .profile-products {
   width: 300px;
   height: 350px;
+  z-index: 1; /* Set a lower z-index than category-container */
 }
 
 .cart-btn {
@@ -78,7 +84,6 @@
 .cart-btn:active {
   color: #606c88;
 }
-
 /* =========================== Media Queries ========================== */
 
 /* Tablets */
@@ -95,17 +100,14 @@
     justify-content: center;
     align-items: center;
     color: #fff;
-    background-color: rgb(77, 77, 77);
-    border-radius: 0 0 20px 20px;
+    background-color: #f6931c;
+
     z-index: 0;
   }
 
-  .category-container h3 {
-    display: none;
-  }
 
   .category {
-    font-size: 1rem;
+    font-size: 1.2rem;
     width: auto;
     transition: 0.25s;
   }
@@ -115,11 +117,11 @@
     transform: translateY(3px);
   }
 
-  .category:active {
-    color: rgb(173, 224, 245);
-    transform: translateY(0px);
-    transition: transform 0.1s ease-in-out;
-  }
+.category:active {
+  color: #06b8bf;
+  transform: translateX(3px);
+  transition: transform 0.1s ease-in-out;
+}
 
   .prod-home-format .profile-products {
     width: 250px;
