@@ -4,7 +4,11 @@ import Modal from "./Modal";
 
 import { ADD_PRODUCT } from "../utils/mutations";
 
-export default function ModalForm({ categories, QUERY_ME }) {
+export default function ModalForm({
+  categories,
+  QUERY_ME,
+  QUERY_ALL_PRODUCTS,
+}) {
   const categoryData = categories;
 
   // <======= USE-STATE: TOGGLE MODAL STATE =======>
@@ -23,7 +27,7 @@ export default function ModalForm({ categories, QUERY_ME }) {
 
   // <======= MUTATION SECTION: ADD PRODUCT =======>
   const [addProduct] = useMutation(ADD_PRODUCT, {
-    refetchQueries: [{ query: QUERY_ME }],
+    refetchQueries: [{ query: QUERY_ME }, { query: QUERY_ALL_PRODUCTS }],
   });
 
   // <======= HANDLE CHANGE: UPDATE FORM STATE FOR PRODUCT =======>
