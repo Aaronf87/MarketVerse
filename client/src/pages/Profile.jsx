@@ -13,6 +13,8 @@ import { FiEdit } from "react-icons/fi";
 import { BsTrash } from "react-icons/bs";
 import { FaUserCircle } from "react-icons/fa";
 
+import { RotatingLines } from "react-loader-spinner";
+
 export default function Profile() {
   // <======= TOGGLE EDIT MODE: USE-STATE SECTION=======>
   const [editMode, setEditMode] = useState(false);
@@ -40,7 +42,17 @@ export default function Profile() {
 
   // <======= DATA SECTION =======>
   if (meLoading || categoryLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="loading">
+        <RotatingLines
+          strokeColor="#f6931c"
+          strokeWidth="5"
+          animationDuration="0.75"
+          width="96"
+          visible={true}
+        />
+      </div>
+    );
   }
 
   const categories = categoryData?.getCategories || [];
