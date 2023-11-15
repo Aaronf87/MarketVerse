@@ -45,7 +45,7 @@ MarketVerse is a application created for people by people who want to make the b
 
 To start using MarketVerse:
 
-1. Visit [MarketVerse](https://marketverse-link.com/).
+1. Visit [MarketVerse](https://marketverse-53c316895099.herokuapp.com/).
 2. Sign up or log in to access the full range of features.
 3. Explore the various product categories.
 4. Add items to your cart and proceed to checkout for purchases.
@@ -67,6 +67,7 @@ MarketVerse integrates various technologies:
 - Database: MongoDB
 - API: GraphQL with Apollo Server
 - Authentication: JWT
+- Heroku
 
 ## Contribution
 
