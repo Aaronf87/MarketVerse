@@ -6,6 +6,8 @@ import Auth from "../utils/auth";
 import CategoryMenu from "./CategoryMenu";
 import { FaCartPlus } from "react-icons/fa";
 
+import { RotatingLines } from "react-loader-spinner";
+
 export default function ProductList() {
   const [category, setCategory] = useState(null);
 
@@ -18,7 +20,17 @@ export default function ProductList() {
   const productData = data?.getProducts || [];
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="loading">
+        <RotatingLines
+          strokeColor="#f6931c"
+          strokeWidth="5"
+          animationDuration="0.75"
+          width="96"
+          visible={true}
+        />
+      </div>
+    );
   }
 
   return (

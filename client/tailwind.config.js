@@ -9,7 +9,7 @@ export default {
       'orange': '#f6p31c',
     },
     screens: {
-      "mobile": "576px",
+      "mobile": "400px",
       "large-mobile": "768px",
       "tablet": "992px",
       "laptop": "1024px",

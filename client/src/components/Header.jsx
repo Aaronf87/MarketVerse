@@ -7,20 +7,20 @@ const Header = () => {
     const currentPath = location.pathname;
 
     return (
-        <header style={{backgroundColor: "#fff"}} className="relative flex w-full flex-wrap items-center justify-between bg-[#FBFBFB] py-5 text-neutral-500 shadow-lg hover:text-neutral-700 focus:text-neutral-700 dark:bg-neutral-600 lg:py-4">
-            <div className="flex w-full flex-wrap items-center justify-between px-3">
+        <header style={{backgroundColor: "#fff"}} className="relative flex w-full  mobile:items-center justify-between bg-[#FBFBFB] py-5 text-neutral-500 shadow-lg hover:text-neutral-700 focus:text-neutral-700 dark:bg-neutral-600 lg:py-4">
+            <div className="flex w-full flex-wrap items-center justify-between  px-3 md:flex">
                 <Link to="/">
                     {/* Logo */}
-                    <Logo className="ml-2 text-xl text-neutral-800 dark:text-neutral-200" />
+                    <Logo className="ml-2" />
                 </Link>
 
-                <div className="flex items-center text ">
+                <div className="flex items-center text lg-mobile:items-center  ">
 
                     {/* If you are Logged In... Render...*/}
                     {Auth.loggedIn() ? (
                         <>
                             {/* Logout Button */}
-                            <button type="button" onClick={() => Auth.logout()} data-te-ripple-init data-te-ripple-color="light" className="text-primary hover:text-primary-600 focus:text-primary-600 active:text-primary-700 mr-3 inline-block rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal transition duration-150 ease-in-out hover:bg-gray-200 focus:outline-none focus:ring-0 motion-reduce:transition-none">
+                            <button type="button" onClick={() => Auth.logout()} data-te-ripple-init data-te-ripple-color="light" className="text-primary hover:text-primary-600 focus:text-primary-600 active:text-primary-700 mr-3 inline-block rounded px-6 pb-2 pt-2.5 text-sm font-medium uppercase leading-normal transition duration-150 ease-in-out hover:bg-gray-200 focus:outline-none focus:ring-0 motion-reduce:transition-none ">
                                 Logout
                             </button>
 
@@ -28,13 +28,13 @@ const Header = () => {
                             {currentPath === '/' ? (
                                 <>
                                     {/* Profile button*/}
-                                    <Link to="/profile" type="button" data-te-ripple-init data-te-ripple-color="light" className="bg-[#f6931c] hover:bg-primary-600 focus:bg-primary-600 active:bg-blue-700 mr-3 inline-block rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] ]">
+                                    <Link to="/profile" type="button" data-te-ripple-init data-te-ripple-color="light" className="bg-[#f6931c] hover:bg-primary-600 focus:bg-primary-600 active:bg-blue-700 mr-3 inline-block rounded px-6 pb-2 pt-2.5 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] ]">
                                         Profile</Link>
                                 </>
                             ) : (
                                 <>
                                     {/* Home button*/}
-                                    <Link to="/" type="button" data-te-ripple-init data-te-ripple-color="light" className="bg-[#f6931c] hover:bg-primary-600 focus:bg-primary-600 active:bg-blue-700 mr-3 inline-block rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] ]">
+                                    <Link to="/" type="button" data-te-ripple-init data-te-ripple-color="light" className="bg-[#f6931c] hover:bg-primary-600 focus:bg-primary-600 active:bg-blue-700 mr-3 inline-block rounded px-6 pb-2 pt-2.5 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] ]">
                                         Home</Link>
                                 </>
                             )}
@@ -42,11 +42,11 @@ const Header = () => {
                     ) : (
                         <>
                             {/* Login Button */}
-                            <Link to="/login" type="button" data-te-ripple-init data-te-ripple-color="light" className="text-primary hover:text-primary-600 focus:text-primary-600 active:text-primary-700 mr-3 inline-block rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal transition duration-150 ease-in-out hover:bg-gray-200 focus:outline-none focus:ring-0 motion-reduce:transition-none">
+                            <Link to="/login" type="button" data-te-ripple-init data-te-ripple-color="light" className="text-primary hover:text-primary-600 focus:text-primary-600 active:text-primary-700 mr-3 inline-block rounded px-6 pb-2 pt-2.5 text-sm font-medium uppercase leading-normal transition duration-150 ease-in-out hover:bg-gray-200 focus:outline-none focus:ring-0 motion-reduce:transition-none">
                                 Login</Link>
 
                             {/* Sign up button*/}
-                            <Link to="/signUp" type="button" data-te-ripple-init data-te-ripple-color="light" className="bg-[#f6931c] hover:bg-primary-600 focus:bg-primary-600 active:bg-blue-700 mr-3 inline-block rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] ]">
+                            <Link to="/signUp" type="button" data-te-ripple-init data-te-ripple-color="light" className="bg-[#f6931c] hover:bg-primary-600 focus:bg-primary-600 active:bg-blue-700 mr-3 inline-block rounded px-6 pb-2 pt-2.5 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] ]">
                                 Sign up</Link>
                         </>
                     )}

@@ -40,7 +40,8 @@ const resolvers = {
       return await Product.find(params)
         .populate("category")
         .populate("userId")
-        .select("-__v -password");
+        .select("-__v -password")
+        .sort({ createdAt: -1 });
     },
 
     // GET ONE PRODUCT BY ID

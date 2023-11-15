@@ -34,7 +34,11 @@ const productSchema = new Schema({
   image: {
     cloudinaryId: String,
     url: String,
-  }
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 const Product = mongoose.model("Product", productSchema);
