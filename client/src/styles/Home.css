@@ -93,7 +93,7 @@
   }
 
   .category-container {
-    position: static;
+    position: sticky;
     height: auto;
     display: flex;
     flex-flow: row wrap;
@@ -102,7 +102,7 @@
     color: #fff;
     background-color: #f6931c;
 
-    z-index: 0;
+    z-index: 3 ;
   }
 
 
