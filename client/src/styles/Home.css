@@ -89,6 +89,9 @@
     align-items: center;
     color: #fff;
     background-color: #f6931c;
+    height: 90px;
+    font-size: .8rem;
+    padding: 0 10px;
 
     z-index: 3;
   }
