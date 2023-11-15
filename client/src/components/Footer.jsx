@@ -43,7 +43,7 @@ export default function Footer() {
             <div className="mx-6 pt-4 text-center">
                 <div className="mb-6">
                     <h5 className="mb-2 font-bold uppercase">Contact Us</h5>
-                    <p>Email: your-email@example.com</p>
+                    <p>Email: Store@marketverse.com</p>
                     <p>Phone: (123) 456-7890</p>
                     {/* Add more as needed */}
                 </div>
