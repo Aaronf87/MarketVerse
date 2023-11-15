@@ -52,6 +52,13 @@ backdrop-filter: blur(8.2px);
   opacity: 0.3;
 }
 
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
 #root {
   display: flex;
   flex-direction: column;
