@@ -1,7 +1,7 @@
 # MarketVerse [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)]()
 
 <br> <p align="center"> 
-[![MarketVerse Logo](/client/src/assets/logo%20(3).png)](https://marketverse-53c316895099.herokuapp.com/)
+[![MarketVerse Logo](/client/src/assets/logo.png)](https://marketverse-53c316895099.herokuapp.com/)
 </p>
 
 <br><p align = "center">
