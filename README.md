@@ -1,7 +1,7 @@
 # MarketVerse [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)]()
 
 <br> <p align="center"> 
-[![MarketVerse Logo](/client/src/assets/logo.png)](https://marketverse-53c316895099.herokuapp.com/)
+[![MarketVerse Logo](/client/src/assets/readme-logo.png)](https://marketverse-53c316895099.herokuapp.com/)
 </p>
 
 <br><p align = "center">
@@ -90,17 +90,26 @@ This project was inspired by the need to create an enjoyable online shopping exp
 
 ## Screenshots
 >Landing Page
-![Landing Page](./public/assets/screenshots/landingpage.png)  
+![Landing Page](/client/src/assets/sh-home.png)  
 
 >User Profile
-![Created user profile]()  
+![Created user profile](/client/src/assets/sh-profile.png)  
 
 >Post a product modal
-![Post a product image]()  
+![Post a product image](/client/src/assets/sh-post.png)  
 
->View products by categories
-![View of one category]()  
+>Update or Delete a Product
+![Update or Delete Product](/client//src/assets/sh-update.png)  
+
+>Mobile Visual
+![Mobile Visual](/client/src/assets/sh-mobile.png)  
+
+>Login
+![Mobile Visual](/client/src/assets/sh-login.png)  
+
+>Sign Up
+![Mobile Visual](/client/src/assets/sh-signup.png)  
 
 >404 Page
-![404 Page]()  
+![404 Page](/client/src/assets/sh-404.png)  
 
