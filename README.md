@@ -1,7 +1,7 @@
 # MarketVerse [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 <br> <p align="center"> 
-[![MarketVerse Logo](/client/src/assets/logo.png)]()
+[![MarketVerse Logo](/client/src/assets/logo.png)](https://marketverse-53c316895099.herokuapp.com/)
 </p>
 <br><p align = "center">
 
@@ -45,7 +45,7 @@ MarketVerse is a application created for people by people who want to make the b
 
 To start using MarketVerse:
 
-1. Visit [MarketVerse]().
+1. Visit [MarketVerse](https://marketverse-53c316895099.herokuapp.com/).
 2. Sign up or log in to access the full range of features.
 3. Explore the various product categories.
 4. Add items to your cart and proceed to checkout for purchases.
